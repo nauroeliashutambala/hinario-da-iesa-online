@@ -122,65 +122,78 @@ no templo.</p>
     background: #e64a19;
 }
 </style>
-<a href="/chaty" id="chat-float-btn" title="Abrir Chat">
+<a href="/chat.html" id="chat-float-btn" title="Abrir Chat">
     <i class="fas fa-comments"></i>
 </a>
 <!-- Fim Botão Flutuante -->
-</body>
-</html>
-<script>
-    // ----------------------------
-    // 1. Pegar idioma e id da URL (?lang= & ?id=)
-    // ----------------------------
-    const urlParams = new URLSearchParams(window.location.search);
-    const idioma = urlParams.get("lang") || "portugues";
-    const hinoId = parseInt(urlParams.get("id"), 10);
-
-    // Caminho completo do JSON
-    const jsonUrl = `/db/${idioma}.json`;
-
+   <script>
     const headerTitle = document.querySelector(".header h1");
     const hinoContent = document.querySelector(".hino-content");
 
     // ----------------------------
-    // 2. Carregar JSON do idioma e mostrar o hino
+    // 1. Tenta obter dados do sessionStorage
     // ----------------------------
-    async function loadHino() {
-        try {
-            const response = await fetch(jsonUrl);
-            if (!response.ok) throw new Error("Erro ao carregar JSON");
+    const hinoSelecionado = sessionStorage.getItem("hinoSelecionado");
+    const idiomaSelecionado = sessionStorage.getItem("idiomaSelecionado");
 
-            const data = await response.json();
-            const hino = data.find(item => parseInt(item.id, 10) === hinoId);
+    // Se existir, converte o hino para objeto
+    const hino = hinoSelecionado ? JSON.parse(hinoSelecionado) : null;
+    const idioma = idiomaSelecionado || "portugues";
 
-            if (!hino) {
-                hinoContent.innerHTML = `<p>Hino não encontrado.</p>`;
-                return;
-            }
-
-            // Atualiza título do cabeçalho
-            headerTitle.textContent = `${hino.id} - ${hino.titulo || hino.title}`;
-
-            // Renderiza o conteúdo do hino (mantém quebras de parágrafos)
-            hinoContent.innerHTML = "";
-            const versos = (hino.hino || "").split(/\n\n/);
-
-            versos.forEach(texto => {
-                const versoDiv = document.createElement("div");
-                versoDiv.className = "verso";
-
-                const p = document.createElement("p");
-                p.textContent = texto.trim();
-
-                versoDiv.appendChild(p);
-                hinoContent.appendChild(versoDiv);
-            });
-
-        } catch (error) {
-            console.error(error);
-            hinoContent.innerHTML = `<p>Erro ao carregar o hino.</p>`;
+    // ----------------------------
+    // 2. Função para renderizar o hino na tela
+    // ----------------------------
+    function renderHino(hinoData) {
+        if (!hinoData) {
+            hinoContent.innerHTML = `<p>Hino não encontrado.</p>`;
+            return;
         }
+
+        headerTitle.textContent = `${hinoData.id} - ${hinoData.titulo || hinoData.title}`;
+        hinoContent.innerHTML = "";
+
+        const versos = (hinoData.hino || "").split(/\n\n/);
+        versos.forEach(texto => {
+            const versoDiv = document.createElement("div");
+            versoDiv.className = "verso";
+
+            const p = document.createElement("p");
+            p.textContent = texto.trim();
+
+            versoDiv.appendChild(p);
+            hinoContent.appendChild(versoDiv);
+        });
     }
 
-    loadHino();
+    // ----------------------------
+    // 3. Se tiver hino no sessionStorage → renderiza direto
+    // Caso contrário, tenta buscar da URL (?lang=&id=)
+    // ----------------------------
+    if (hino) {
+        renderHino(hino);
+    } else {
+        // Tenta pegar os parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const idiomaURL = urlParams.get("lang") || idioma;
+        const hinoId = urlParams.get("id");
+
+        if (!hinoId) {
+            hinoContent.innerHTML = `<p>Nenhum hino selecionado.</p>`;
+        } else {
+            const jsonUrl = `db/${idiomaURL}.json`;
+            fetch(jsonUrl)
+                .then(res => res.json())
+                .then(data => {
+                    const hinoData = data.find(item => String(item.id) === String(hinoId));
+                    renderHino(hinoData);
+                })
+                .catch(err => {
+                    console.error(err);
+                    hinoContent.innerHTML = `<p>Erro ao carregar o hino.</p>`;
+                });
+        }
+    }
 </script>
+ 
+</body>
+</html>
