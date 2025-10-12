@@ -133,7 +133,7 @@
         // Evento de clique -> redireciona para rota amigável
         listItem.addEventListener("click", () => {
             const idiomaSlug = toSlug(item.name);
-            window.location.href = `/hinos/${idiomaSlug}`;
+            window.location.href = `hinos.html?lang=${idiomaSlug}``;
         });
 
         listContainer.appendChild(listItem);
@@ -164,7 +164,7 @@
     background: #e64a19;
 }
 </style>
-<a href="/chaty" id="chat-float-btn" title="Abrir Chat">
+<a href="/chat.html" id="chat-float-btn" title="Abrir Chat">
     <i class="fas fa-comments"></i>
 </a>
 <!-- Fim Botão Flutuante -->
