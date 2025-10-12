@@ -130,19 +130,20 @@ no templo.</p>
 </html>
 <script>
     // ----------------------------
-    // 1. Pegar idioma e id da URL
+    // 1. Pegar idioma e id da URL (?lang= & ?id=)
     // ----------------------------
-    const pathParts = window.location.pathname.split("/");
-    const idioma = pathParts[2] || "portugues"; // ex: umbundu
-    const hinoId = parseInt(pathParts[3], 10);  // ex: 4
+    const urlParams = new URLSearchParams(window.location.search);
+    const idioma = urlParams.get("lang") || "portugues";
+    const hinoId = parseInt(urlParams.get("id"), 10);
 
+    // Caminho completo do JSON
     const jsonUrl = `https://hinario-iesa-online.wuaze.com/db/${idioma}.json`;
 
     const headerTitle = document.querySelector(".header h1");
     const hinoContent = document.querySelector(".hino-content");
 
     // ----------------------------
-    // 2. Carregar JSON do idioma
+    // 2. Carregar JSON do idioma e mostrar o hino
     // ----------------------------
     async function loadHino() {
         try {
@@ -157,25 +158,20 @@ no templo.</p>
                 return;
             }
 
-            // Atualiza título
+            // Atualiza título do cabeçalho
             headerTitle.textContent = `${hino.id} - ${hino.titulo || hino.title}`;
 
-            // Renderiza conteúdo do hino (suporta versos com \n\n)
+            // Renderiza o conteúdo do hino (mantém quebras de parágrafos)
             hinoContent.innerHTML = "";
             const versos = (hino.hino || "").split(/\n\n/);
 
-            versos.forEach((texto, index) => {
+            versos.forEach(texto => {
                 const versoDiv = document.createElement("div");
                 versoDiv.className = "verso";
-
-                const numero = document.createElement("div");
-                numero.className = "verso-number";
-                numero.textContent = ``;
 
                 const p = document.createElement("p");
                 p.textContent = texto.trim();
 
-                versoDiv.appendChild(numero);
                 versoDiv.appendChild(p);
                 hinoContent.appendChild(versoDiv);
             });
