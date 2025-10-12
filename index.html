@@ -123,18 +123,19 @@
   <script>
   let itens_list = [
     {titulo: "Hinos", img: "musical-note.png", link: "idiomas.html"}, 
-    {titulo: "Chamada para adoração", img: "open-book.png", link: "chamada.html"},
-    {titulo: "Súplica geral", img: "folded.png", link: "suplica.html"}, 
-    {titulo: "Litania", img: "calendar.png", link: "litania.html"},
+    {titulo: "Chamada para adoração", img: "open-book.png", link: "geral.html?file=chamada.json"},
+    {titulo: "Súplica geral", img: "folded.png", link: "geral.html?file=suplica.json"}, 
+    {titulo: "Litania", img: "calendar.png", link: "geral.html?file=litania.json"},
     
     // --- Novos itens ---
-    {titulo: "Pai Nosso", img: "open-book.png", link: "painosso.html"},
-    {titulo: "Credo dos Apóstolos", img: "folded.png", link: "credo.html"},
+    {titulo: "Pai Nosso", img: "open-book.png", link: "geral.html?file=painosso.json"},
+    {titulo: "Credo dos Apóstolos", img: "folded.png", link: "geral.html?file=credo.json"},
     
     // --- Itens seguintes ---
     {titulo: "Definições", img: "recent.png", link: "chat.html"},
     {titulo: "Favoritos", img: "heart.png", link: "home.html"}
   ];
+
 
   const sec = document.querySelector("section");
 
