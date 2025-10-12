@@ -155,16 +155,17 @@
     const pageTitle = document.getElementById('page-title');
 
     // ----------------------------
-    // 1. Captura o idioma da URL
+    // 1. Captura o idioma da URL (?lang=)
     // ----------------------------
-    const pathParts = window.location.pathname.split("/");
-    const idioma = pathParts[2] || "portugues"; // fallback para português
+    const urlParams = new URLSearchParams(window.location.search);
+    const idioma = urlParams.get("lang") || "portugues"; // fallback para português
     const jsonUrl = `https://hinario-iesa-online.wuaze.com/db/${idioma}.json`;
-    
-    const headerTitle = document.querySelector(".header h1");
-headerTitle.textContent = idioma;
 
-     // ----------------------------
+    // Atualiza o título no header
+    const headerTitle = document.querySelector(".header h1");
+    if (headerTitle) headerTitle.textContent = idioma;
+
+    // ----------------------------
     // 2. Renderiza a lista de hinos
     // ----------------------------
     function renderList(data) {
@@ -180,9 +181,9 @@ headerTitle.textContent = idioma;
             listItem.appendChild(title);
             listContainer.appendChild(listItem);
 
-            // Clique → abre rota amigável /read/idioma/id
+            // Clique → abre a página de leitura
             listItem.addEventListener("click", () => {
-                window.location.href = `/read/${idioma}/${item.id}`;
+                window.location.href = `read.html?lang=${idioma}&id=${item.id}`;
             });
         });
     }
@@ -230,6 +231,7 @@ headerTitle.textContent = idioma;
             });
     });
 </script>
+
 <!-- Botão Flutuante do Chat -->
 <style>
 #chat-float-btn {
