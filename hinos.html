@@ -153,48 +153,30 @@
     const closeIcon = document.getElementById('close-icon');
     const pageTitle = document.getElementById('page-title');
 
-    // ----------------------------
-    // 1. Captura o idioma da URL (?lang=)
-    // ----------------------------
     const urlParams = new URLSearchParams(window.location.search);
-    const idioma = urlParams.get("lang") || "portugues"; // fallback para português
+    const idioma = urlParams.get("lang") || "portugues";
     const jsonUrl = `db/${idioma}.json`;
 
-    // Atualiza o título no header
     const headerTitle = document.querySelector(".header h1");
     if (headerTitle) headerTitle.textContent = idioma;
 
-    // ----------------------------
-    // 2. Renderiza a lista de hinos
-    // ----------------------------
     function renderList(data) {
         listContainer.innerHTML = '';
         data.forEach(item => {
             const listItem = document.createElement('div');
             listItem.className = 'list-item';
-
-            const title = document.createElement('div');
-            title.className = 'title';
-            title.textContent = `${item.id} - ${item.titulo || item.title}`;
-
-            listItem.appendChild(title);
+            listItem.innerHTML = `<div class="title">${item.id} - ${item.titulo || item.title}</div>`;
             listContainer.appendChild(listItem);
 
-            // Clique → guarda dados e vai para a página de leitura
+            // Clique → salvar no sessionStorage e redirecionar
             listItem.addEventListener("click", () => {
-                // Guarda o hino selecionado e o idioma
                 sessionStorage.setItem("hinoSelecionado", JSON.stringify(item));
                 sessionStorage.setItem("idiomaSelecionado", idioma);
-
-                // Redireciona sem precisar carregar de novo o JSON
-                window.location.href = `read.html`;
+                window.location.href = `read.html?lang=${idioma}&id=${item.id}`;
             });
         });
     }
 
-    // ----------------------------
-    // 3. Buscar JSON do idioma
-    // ----------------------------
     async function loadHinos() {
         try {
             const response = await fetch(jsonUrl);
@@ -208,32 +190,6 @@
     }
 
     loadHinos();
-
-    // ----------------------------
-    // 4. Pesquisar na lista
-    // ----------------------------
-    searchIcon.addEventListener('click', () => {
-        searchBar.classList.add('active');
-        pageTitle.style.display = 'none';
-    });
-
-    closeIcon.addEventListener('click', () => {
-        searchBar.classList.remove('active');
-        pageTitle.style.display = 'block';
-    });
-
-    document.getElementById('search-input').addEventListener('input', (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-        fetch(jsonUrl)
-            .then(res => res.json())
-            .then(data => {
-                const filteredData = data.filter(item =>
-                    (item.titulo || item.title).toLowerCase().includes(searchTerm) ||
-                    String(item.id).includes(searchTerm)
-                );
-                renderList(filteredData);
-            });
-    });
 </script>
 
 
