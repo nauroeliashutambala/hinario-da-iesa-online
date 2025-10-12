@@ -126,23 +126,17 @@ no templo.</p>
     <i class="fas fa-comments"></i>
 </a>
 <!-- Fim Botão Flutuante -->
-   <script>
+  <script>
     const headerTitle = document.querySelector(".header h1");
     const hinoContent = document.querySelector(".hino-content");
 
-    // ----------------------------
-    // 1. Tenta obter dados do sessionStorage
-    // ----------------------------
+    // Pegar dados do sessionStorage
     const hinoSelecionado = sessionStorage.getItem("hinoSelecionado");
     const idiomaSelecionado = sessionStorage.getItem("idiomaSelecionado");
-
-    // Se existir, converte o hino para objeto
     const hino = hinoSelecionado ? JSON.parse(hinoSelecionado) : null;
     const idioma = idiomaSelecionado || "portugues";
 
-    // ----------------------------
-    // 2. Função para renderizar o hino na tela
-    // ----------------------------
+    // Função para renderizar o hino
     function renderHino(hinoData) {
         if (!hinoData) {
             hinoContent.innerHTML = `<p>Hino não encontrado.</p>`;
@@ -156,23 +150,16 @@ no templo.</p>
         versos.forEach(texto => {
             const versoDiv = document.createElement("div");
             versoDiv.className = "verso";
-
-            const p = document.createElement("p");
-            p.textContent = texto.trim();
-
-            versoDiv.appendChild(p);
+            versoDiv.innerHTML = `<p>${texto.trim()}</p>`;
             hinoContent.appendChild(versoDiv);
         });
     }
 
-    // ----------------------------
-    // 3. Se tiver hino no sessionStorage → renderiza direto
-    // Caso contrário, tenta buscar da URL (?lang=&id=)
-    // ----------------------------
+    // Se há dados salvos → renderiza diretamente
     if (hino) {
         renderHino(hino);
     } else {
-        // Tenta pegar os parâmetros da URL
+        // Fallback: busca via URL
         const urlParams = new URLSearchParams(window.location.search);
         const idiomaURL = urlParams.get("lang") || idioma;
         const hinoId = urlParams.get("id");
@@ -187,12 +174,17 @@ no templo.</p>
                     const hinoData = data.find(item => String(item.id) === String(hinoId));
                     renderHino(hinoData);
                 })
-                .catch(err => {
-                    console.error(err);
+                .catch(() => {
                     hinoContent.innerHTML = `<p>Erro ao carregar o hino.</p>`;
                 });
         }
     }
+
+    // Atualiza sempre que a página for reaberta (para outro hino)
+    window.addEventListener("pageshow", () => {
+        const novoHino = sessionStorage.getItem("hinoSelecionado");
+        if (novoHino) renderHino(JSON.parse(novoHino));
+    });
 </script>
  
 </body>
