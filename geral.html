@@ -113,7 +113,7 @@
 
 <body>
   <div class="header">
-    <a href="home.html" title="Voltar para a página inicial"><i class="fas fa-arrow-left"></i></a>
+    <a href="index.html" title="Voltar para a página inicial"><i class="fas fa-arrow-left"></i></a>
     <span id="titulo-header">Carregando...</span>
   </div>
 
@@ -135,7 +135,7 @@
     // Lê o nome do arquivo pela URL (ex: geral.html?file=suplica)
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file') || 'chamada'; // padrão: chamada.json
-    const path = `hinario-da-iesa-online/db/geral/${file}.json`;
+    const path = `db/geral/${file}.json`;
 
     // Carrega o arquivo JSON
     fetch(path)
