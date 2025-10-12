@@ -146,7 +146,6 @@
     </div>
 
     <div class="list-container" id="list-container"></div>
-
 <script>
     const listContainer = document.getElementById('list-container');
     const searchIcon = document.getElementById('search-icon');
@@ -181,9 +180,14 @@
             listItem.appendChild(title);
             listContainer.appendChild(listItem);
 
-            // Clique → abre a página de leitura
+            // Clique → guarda dados e vai para a página de leitura
             listItem.addEventListener("click", () => {
-                window.location.href = `read.html?lang=${idioma}&id=${item.id}`;
+                // Guarda o hino selecionado e o idioma
+                sessionStorage.setItem("hinoSelecionado", JSON.stringify(item));
+                sessionStorage.setItem("idiomaSelecionado", idioma);
+
+                // Redireciona sem precisar carregar de novo o JSON
+                window.location.href = `read.html`;
             });
         });
     }
@@ -231,6 +235,7 @@
             });
     });
 </script>
+
 
 <!-- Botão Flutuante do Chat -->
 <style>
