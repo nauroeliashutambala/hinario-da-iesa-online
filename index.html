@@ -122,31 +122,32 @@
   </footer>
   <script>
   let itens_list = [
-    {titulo: "Hinos", img : "musical-note.png", link: "/idiomas"}, 
-    {titulo: "Chamada para adoração", img : "open-book.png", link: "/chamada"},
-    {titulo: "Suplica geral", img : "folded.png", link: "/suplica"}, 
-    {titulo: "Litania", img : "calendar.png", link: "/litania"},
+    {titulo: "Hinos", img: "musical-note.png", link: "idiomas.html"}, 
+    {titulo: "Chamada para adoração", img: "open-book.png", link: "chamada.html"},
+    {titulo: "Súplica geral", img: "folded.png", link: "suplica.html"}, 
+    {titulo: "Litania", img: "calendar.png", link: "litania.html"},
     
-    // --- Novos itens adicionados ---
-    {titulo: "Pai Nosso", img : "open-book.png", link: "/painosso"}, // Repete 'open-book.png'
-    {titulo: "Credo dos Apóstolos", img : "folded.png", link: "/credo"}, // Repete 'folded.png'
+    // --- Novos itens ---
+    {titulo: "Pai Nosso", img: "open-book.png", link: "painosso.html"},
+    {titulo: "Credo dos Apóstolos", img: "folded.png", link: "credo.html"},
     
     // --- Itens seguintes ---
-    {titulo: "Definiçães", img : "recent.png", link: "/chat"},
-    {titulo: "Favoritos", img : "heart.png", link: "/home"}
-];
+    {titulo: "Definições", img: "recent.png", link: "chat.html"},
+    {titulo: "Favoritos", img: "heart.png", link: "home.html"}
+  ];
 
-  let sec = document.querySelector("section");
+  const sec = document.querySelector("section");
 
-  for (let i = 0; i < itens_list.length; i++) {
+  itens_list.forEach(item => {
     sec.innerHTML += `
-      <a href="${itens_list[i].link}" class="card">
-        <img src="assets/img/${itens_list[i].img}" />
-        <p>${itens_list[i].titulo}</p>
+      <a href="${item.link}" class="card">
+        <img src="assets/img/${item.img}" alt="${item.titulo}">
+        <p>${item.titulo}</p>
       </a>
     `;
-  }
+  });
 </script>
+
 <!-- Botão Flutuante do Chat -->
 <style>
 #chat-float-btn {
