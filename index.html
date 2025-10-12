@@ -1,0 +1,180 @@
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Título e descrição -->
+  <title>Hinário da IESA Online</title>
+  <meta name="description" content="Hinário da IESA Online - Acesse hinos, letras e louvores da Igreja Evangélica Sinodal de Angola.">
+  <meta name="keywords" content="Hinário IESA, hinos evangélicos, louvores online, música gospel, Angola, Umbundo, Português">
+  <meta name="author" content="Nauro Elias Hutambala">
+
+  <!-- SEO Extra -->
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="pt-BR">
+  <meta name="theme-color" content="#FFA500">
+
+  <!-- Open Graph (Facebook/WhatsApp) -->
+  <meta property="og:title" content="Hinário da IESA Online">
+  <meta property="og:description" content="Hinos e louvores da Igreja Evangélica Sinodal de Angola disponíveis online.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hinario-iesa-online.wuaze.com">
+  <meta property="og:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hinário da IESA Online">
+  <meta name="twitter:description" content="Acesse hinos e louvores da IESA em português e umbundo.">
+  <meta name="twitter:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #f8f8f8; /* Fundo do cabeçalho, similar à imagem */
+      padding: 10px 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .header-top i {
+      font-size: 24px;
+      color: #FFD700; /* Cor dourada para os ícones */
+    }
+    .header-top nav img {
+      width: 30px;
+      height: 30px;
+    }
+    .logo {
+      width: 80px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    h2 {
+      margin: 10px 0 0;
+      color: #333;
+    }
+    section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+    .card {
+      background-color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #333;
+    }
+    .card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    .card p {
+      margin: 0;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+
+
+  <header>
+    <div class="header-top">
+      <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-info-circle"></i>
+    </div>
+    <img src="assets/img/logo.png" class="logo" alt="Logotipo IESA - IGREJA EVANGELICA SINODAL DE ANGOLA">
+    <h2>Hinário da IESA</h2>
+      <p style="color: #f8f8f8;">Versão online do Hinário </p>
+  </header>
+  <section>
+  </section>
+
+  
+  <footer>
+     NauroVibes @ 2025 
+    Todos os direitos reservados
+  </footer>
+  <script>
+  let itens_list = [
+    {titulo: "Hinos", img : "musical-note.png", link: "/idiomas"}, 
+    {titulo: "Chamada para adoração", img : "open-book.png", link: "/chamada"},
+    {titulo: "Suplica geral", img : "folded.png", link: "/suplica"}, 
+    {titulo: "Litania", img : "calendar.png", link: "/litania"},
+    
+    // --- Novos itens adicionados ---
+    {titulo: "Pai Nosso", img : "open-book.png", link: "/painosso"}, // Repete 'open-book.png'
+    {titulo: "Credo dos Apóstolos", img : "folded.png", link: "/credo"}, // Repete 'folded.png'
+    
+    // --- Itens seguintes ---
+    {titulo: "Definiçães", img : "recent.png", link: "/chat"},
+    {titulo: "Favoritos", img : "heart.png", link: "/home"}
+];
+
+  let sec = document.querySelector("section");
+
+  for (let i = 0; i < itens_list.length; i++) {
+    sec.innerHTML += `
+      <a href="${itens_list[i].link}" class="card">
+        <img src="assets/img/${itens_list[i].img}" />
+        <p>${itens_list[i].titulo}</p>
+      </a>
+    `;
+  }
+</script>
+<!-- Botão Flutuante do Chat -->
+<style>
+#chat-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: #ff5722;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#chat-float-btn:hover {
+  background: #e64a19;
+}
+</style>
+<a href="/chaty" id="chat-float-btn" title="Abrir Chat">
+  <i class="fas fa-comments"></i>
+</a>
+<!-- Fim Botão Flutuante -->
+
+

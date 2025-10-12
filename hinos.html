@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hinos - Hinário da IESA Online</title>
+    <meta name="description" content="Veja todos os hinos disponíveis da Igreja Evangélica Sinodal de Angola.">
+    <meta name="keywords" content="hinos, hinário, IESA, Angola, louvores, música gospel, português, umbundo">
+    <meta name="author" content="Nauro Elias Hutambala">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="pt-BR">
+    <meta name="theme-color" content="#4CAF50">
+    <meta property="og:title" content="Hinos - Hinário da IESA Online">
+    <meta property="og:description" content="Veja todos os hinos disponíveis da Igreja Evangélica Sinodal de Angola.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hinario-iesa-online.wuaze.com/hinos">
+    <meta property="og:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hinos - Hinário da IESA Online">
+    <meta name="twitter:description" content="Veja todos os hinos disponíveis da Igreja Evangélica Sinodal de Angola.">
+    <meta name="twitter:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #ff5722;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .header .left-section {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .header .back-arrow {
+            font-size: 24px;
+            margin-right: 20px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header .search-icon {
+            font-size: 22px;
+            cursor: pointer;
+            padding: 5px;
+            color: white;
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            background-color: #ff5722;
+            padding: 0 20px;
+            box-sizing: border-box;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .search-bar.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 10px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+
+        .search-bar .close-icon {
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 10px;
+            color: white;
+        }
+
+        .list-container {
+            padding: 20px 10px;
+        }
+
+        .list-item {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .list-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .list-item .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-section">
+            <!-- Ícone seta para trás -->
+            <i class="fa-solid fa-arrow-left back-arrow"></i>
+            <h1 id="page-title">Português</h1>
+        </div>
+        <!-- Ícone lupa -->
+        <i class="fa-solid fa-magnifying-glass search-icon" id="search-icon"></i>
+        
+        <div class="search-bar" id="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquisar hino...">
+            <!-- Ícone X -->
+            <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
+        </div>
+    </div>
+
+    <div class="list-container" id="list-container"></div>
+
+<script>
+    const listContainer = document.getElementById('list-container');
+    const searchIcon = document.getElementById('search-icon');
+    const searchBar = document.getElementById('search-bar');
+    const closeIcon = document.getElementById('close-icon');
+    const pageTitle = document.getElementById('page-title');
+
+    // ----------------------------
+    // 1. Captura o idioma da URL
+    // ----------------------------
+    const pathParts = window.location.pathname.split("/");
+    const idioma = pathParts[2] || "portugues"; // fallback para português
+    const jsonUrl = `https://hinario-iesa-online.wuaze.com/db/${idioma}.json`;
+    
+    const headerTitle = document.querySelector(".header h1");
+headerTitle.textContent = idioma;
+
+     // ----------------------------
+    // 2. Renderiza a lista de hinos
+    // ----------------------------
+    function renderList(data) {
+        listContainer.innerHTML = '';
+        data.forEach(item => {
+            const listItem = document.createElement('div');
+            listItem.className = 'list-item';
+
+            const title = document.createElement('div');
+            title.className = 'title';
+            title.textContent = `${item.id} - ${item.titulo || item.title}`;
+
+            listItem.appendChild(title);
+            listContainer.appendChild(listItem);
+
+            // Clique → abre rota amigável /read/idioma/id
+            listItem.addEventListener("click", () => {
+                window.location.href = `/read/${idioma}/${item.id}`;
+            });
+        });
+    }
+
+    // ----------------------------
+    // 3. Buscar JSON do idioma
+    // ----------------------------
+    async function loadHinos() {
+        try {
+            const response = await fetch(jsonUrl);
+            if (!response.ok) throw new Error("Erro ao carregar o JSON");
+            const data = await response.json();
+            renderList(data);
+        } catch (error) {
+            console.error(error);
+            listContainer.innerHTML = `<p>Não foi possível carregar os hinos de <b>${idioma}</b>.</p>`;
+        }
+    }
+
+    loadHinos();
+
+    // ----------------------------
+    // 4. Pesquisar na lista
+    // ----------------------------
+    searchIcon.addEventListener('click', () => {
+        searchBar.classList.add('active');
+        pageTitle.style.display = 'none';
+    });
+
+    closeIcon.addEventListener('click', () => {
+        searchBar.classList.remove('active');
+        pageTitle.style.display = 'block';
+    });
+
+    document.getElementById('search-input').addEventListener('input', (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        fetch(jsonUrl)
+            .then(res => res.json())
+            .then(data => {
+                const filteredData = data.filter(item =>
+                    (item.titulo || item.title).toLowerCase().includes(searchTerm) ||
+                    String(item.id).includes(searchTerm)
+                );
+                renderList(filteredData);
+            });
+    });
+</script>
+<!-- Botão Flutuante do Chat -->
+<style>
+#chat-float-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#chat-float-btn:hover {
+    background: #e64a19;
+}
+</style>
+<a href="/chaty" id="chat-float-btn" title="Abrir Chat">
+    <i class="fas fa-comments"></i>
+</a>
+<!-- Fim Botão Flutuante -->
+</body>
+</html>

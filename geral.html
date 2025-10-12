@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Súplica Geral - Hinário da IESA Online</title>
+    <meta name="description" content="Página de súplicas e orações do Hinário da Igreja Evangélica Sinodal de Angola.">
+    <meta name="keywords" content="súplica, oração, hinário, IESA, Angola, português, umbundo">
+    <meta name="author" content="Nauro Elias Hutambala">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="pt-BR">
+    <meta name="theme-color" content="#4CAF50">
+    <meta property="og:title" content="Súplica Geral - Hinário da IESA Online">
+    <meta property="og:description" content="Página de súplicas e orações do Hinário da Igreja Evangélica Sinodal de Angola.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hinario-iesa-online.wuaze.com/geral">
+    <meta property="og:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Súplica Geral - Hinário da IESA Online">
+    <meta name="twitter:description" content="Página de súplicas e orações do Hinário da Igreja Evangélica Sinodal de Angola.">
+    <meta name="twitter:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            padding: 0;
+        }
+        /* --- Estilo do Cabeçalho (Laranja) --- */
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 15px;
+            font-size: 1.2em;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        /* --- Estilo do Menu de Abas (Tabs) --- */
+        .tab-menu {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+            background-color: white;
+        }
+        .tab-button {
+            flex-grow: 1; /* Faz com que as abas ocupem todo o espaço */
+            text-align: center;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            color: #777;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .tab-button.active {
+            color: #ff6600; /* Cor de destaque da aba ativa */
+        }
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; /* Ajusta para ficar em cima da borda inferior */
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #ff6600;
+        }
+
+        /* --- Estilo do Conteúdo (Content) --- */
+        .tab-content {
+            padding: 20px;
+        }
+        .content-pane {
+            display: none; /* Esconde todos os painéis por padrão */
+        }
+        .content-pane.active {
+            display: block; /* Mostra o painel ativo */
+        }
+
+        /* --- Estilos do Texto (Como na Imagem) --- */
+        .minister, .congregation {
+            margin-bottom: 1.5em;
+        }
+        .minister strong, .congregation strong {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        .congregation strong:not(.minister strong) {
+            /* Mantém a palavra "Congregação:" em negrito */
+        }
+        .congregation p {
+            font-weight: normal; /* Para o texto da congregação em negrito */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="/hinario/home" title="Voltar para a página inicial"><i class="fas fa-arrow-left"></i></a>
+        <span>Súplica Geral</span>
+    </div>
+
+    <div class="tab-menu">
+        <div class="tab-button active" data-tab="portugues">Português</div>
+        <div class="tab-button" data-tab="umbundu">Umbundu</div>
+    </div>
+
+    <div class="tab-content">
+        <div id="portugues" class="content-pane active">
+            <div class="minister">
+                <strong>Ministro:</strong> Buscai ao Senhor enquanto se pode achar. Invocai-O enquanto está perto. Deixe o ímpio o seu caminho, e o homem maligno os seus pensamentos, e se converta ao Senhor, que se compadecerá dele. Torne para o nosso Deus, porque grandioso é em perdoar.
+            </div>
+
+            <div class="congregation">
+                <strong>Congregação:</strong> Porque **o Senhor é bom e eterna a sua misericórdia. A Sua verdade estende-se de geração a geração.**
+            </div>
+            <div class="minister">
+                <strong>Ministro:</strong> Ainda que os vossos pecados sejam como a escarlata, eles se tornarão brancos como a neve; ainda que sejam vermelhos como o carmezim, se tornarão como a branca lã.
+            </div>
+
+            <div class="congregation">
+                <strong>Congregação:</strong> Se dissermos que não temos pecado, enganamo-nos a nós mesmos e não há verdade em nós. **Se confessarmos os nossos pecados, Ele é fiel e justo para nos perdoar os pecados e para nos purificar de toda a injustiça.**
+            </div>
+
+            <div class="minister">
+                <strong>Ministro:</strong> O que encobre as suas transgressões não prosperará, mas o que as confessa e as deixa alcançará misericórdia. Confessemos, pois, os nossos pecados, porque bem-aventurado é aquele cuja transgressão é perdoada, e cujo pecado é coberto.
+            </div>
+
+            <div class="congregation">
+                <strong>Congregação:</strong> **Confessei-te o meu pecado, e a minha maldade não encobri. Dizia eu, confessarei ao Senhor as minhas transgressões, e Tu perdoaste a maldade**
+            </div>
+        </div>
+
+        <div id="umbundu" class="content-pane">
+            <p>***Aqui viria o texto da Súplica Geral traduzido para Umbundu.***</p>
+        </div>
+    </div>
+
+    <script>
+  // Função para ler parâmetro ?page=xxx
+  function getQueryParam(param) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(param);
+  }
+
+  const page = getQueryParam("page"); // suplica | litania | chamada
+  const baseURL = "https://hinario-iesa-online.wuaze.com/db/geral/";
+  const filePath = `${baseURL}${page}.json`;
+
+  // Seleciona as abas e os painéis
+  const tabs = document.querySelectorAll(".tab-button");
+  const panes = document.querySelectorAll(".content-pane");
+
+  // Evento de clique nas tabs
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const target = tab.getAttribute("data-tab");
+
+      // Alterna a aba ativa
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      // Alterna o painel ativo
+      panes.forEach(p => p.classList.remove("active"));
+      document.getElementById(target).classList.add("active");
+    });
+  });
+
+  async function loadData() {
+    console.log("🔎 Tentando carregar:", filePath); // Debug da URL
+
+    try {
+      const response = await fetch(filePath);
+      if (!response.ok) throw new Error("Erro HTTP " + response.status);
+
+      const data = await response.json();
+
+      // Preenche os textos nas tabs
+      document.getElementById("portugues").innerHTML = `
+        <h2>${data.titulo_pt || "Sem título PT"}</h2>
+        <p>${data.texto_pt || ""}</p>
+      `;
+      document.getElementById("umbundu").innerHTML = `
+        <h2>${data.titulo_um || "Sem título UM"}</h2>
+        <p>${data.texto_um || ""}</p>
+      `;
+    } catch (error) {
+      console.error("❌ Erro ao buscar:", error);
+      document.getElementById("portugues").innerHTML = 
+        `<p style="color:red">Erro: ${error.message}</p>`;
+    }
+  }
+
+  loadData();
+</script>
+
+<!-- Botão Flutuante do Chat -->
+<style>
+#chat-float-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#chat-float-btn:hover {
+    background: #e64a19;
+}
+</style>
+<a href="/chaty" id="chat-float-btn" title="Abrir Chat">
+    <i class="fas fa-comments"></i>
+</a>
+<!-- Fim Botão Flutuante -->
+</body>
+</html>

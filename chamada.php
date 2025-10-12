@@ -1,0 +1,65 @@
+<?php
+header('Content-Type: application/json; charset=utf-8');
+
+echo json_encode([
+    "titulo_pt" => "CHAMADA PARA ADORAÇÃO",
+    "titulo_um" => "ONOHA YATETE",
+    "texto_pt" => "Ministro: O Senhor está no Seu santo templo: cale-se diante dele toda a terra.
+
+### Congregação: Escutarei o que Deus, o Senhor disser; porque falará de paz ao Seu povo.
+
+Ministro: Deus é o nosso, refúgio e fortaleza, socorro bem presente na angústia.
+
+### Congregação: Pelo que não temeremos, ainda que a terra se mude, e ainda que os montes se transportem para o meio dos mares.
+
+Ministro: Esperai no Senhor, porque no Senhor há misericórdia, e nele há abundante redenção.
+
+### Congregação: Aguardo ao Senhor: a minha alma o aguarda, e espero na Sua palavra.
+
+Engrandecei ao Senhor comigo, e juntos exaltemos o Seu nome.
+
+### Congregação: Porque grande é o Senhor e digno de louvor.
+
+Misericordioso e piedoso é o Senhor; longânimo e grande em benignidade.
+
+### Congregação: Não nos tratou segundo os nossos pecados; nem nos retribuiu segundo as nossas iniquidades.
+
+Quanto o céu está elevado acima da terra, assim é grande a Sua misericórdia para com os que o temem.
+
+### Congregação: Quanto está longe o oriente do ocidente, assim afasta de nós as nossas transgressões.
+
+Confia no Senhor de todo o teu coração, e não te estribes no teu próprio entendimento.
+
+### Congregação: Sonda-me ó Deus, e conhece o meu coração; prova-me, e conhece os meus pensamentos, e vê se há em mim algum caminho mau, e guia-me pelo caminho eterno.",
+    "texto_um" => "Usongi: Suku o kasi vonembele yaye yi kola. Omanu vosi vohile kovaso aye.
+
+### Ekongelo: Njeva eci ci popia Suku Yehova, momo o popia ombembua lomanu vaye.
+
+Usongi: Suku, eye Ocikolo cetu, haye ukuaku kolisa. Eye Oñuatisi; kohali o moleha lombili.
+
+### Ekongelo: Oco ka tu yokoka, ndaño oluali lu pongoloka, ndaño olomunda vi tutumuhila pokati kokalunga.
+
+Usongi: Imbi ovaso ku Yehova; momo ku Yehova ku kuete ohenda; kokuaye ku li eyovo lia lua.
+
+### Ekongelo: Njimba ovaso ku Yehova; utima wange u wimbila ovaso; ndavoka kondaka yaye.
+
+Usongi: Kemainyi Yehova kumuamue lame; tu pandiyili pamosi onduko yaye.
+
+### Ekongelo: Momo Yehova unene, kuenje wa posokela esivayo lia piãla.
+
+Usongi: Yehova ukuahenda, o kuete ocali. O livala konyeño. Ocisola caye calua cimue.
+
+### Ekongelo: Ka lingile letu eci ca soka lovakandu etu. Ca sesamela olohole vietu, hacoko a tu muisa.
+
+Usongi: Ndeci kilu kua lepa loposi, haico ohenda yaye ya lua kuava vo sumbila.
+
+### Ekongelo: Ndeci kutundilo kupala lutakelo, haico oku lueya kuetu a ku kapa ocipala letu.
+
+Usongi: Kolela Suku lutima wove wosi. Ku ka lipandiye lolondunge viove muele.
+
+### Ekongelo: Ñulihise, a Suku; kuliha utima wange. Seteke; kuliha ovisimilo viange, ku vanji nda ñasi lovituwa vieviho. Songuile vonjila ka yi pui.
+
+Usongi: Tali ocisola ca piãla ndomo Tate a tu ciha, okuti tua tukuiwa omãla va Suku.
+
+### Ekongelo: Pandu, pandu ku Suku mekonda lio cali cahe ca lua."
+], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

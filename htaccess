@@ -1,0 +1,39 @@
+
+RewriteEngine On
+RewriteBase /
+
+# Página inicial
+RewriteRule ^$ index.html [L,QSA]
+RewriteRule ^home/?$ index.html [L,QSA]
+RewriteRule ^index/?$ index.html [L,QSA]
+
+# Idiomas
+RewriteRule ^idiomas/?$ idiomas.html [L,QSA]
+
+# Chamada
+RewriteRule ^chamada/?$ geral.php?page=chamada [L,QSA]
+
+# Súplicas
+RewriteRule ^suplica/?$ geral.php?page=suplica [L,QSA]
+RewriteRule ^painosso/?$ geral.php?page=painosso [L,QSA]
+
+# Litania e Credo
+RewriteRule ^litania/?$ geral.php?page=litania [L,QSA]
+RewriteRule ^credo/?$ geral.php?page=credo [L,QSA]
+
+# Chatendpoint API
+RewriteRule ^chatendpoint/?$ chatendpoint.php [L,QSA]
+
+# Hinos
+RewriteRule ^hinos/([^/]+)/?$ hinos.html?idioma=$1 [L,QSA]
+
+# Read
+RewriteRule ^read/([^/]+)/([0-9]+)/?$ read.html?idioma=$1&id=$2 [L,QSA]
+
+# Erros personalizados
+ErrorDocument 400 https://hinario-iesa-online.wuaze.com/error.php
+ErrorDocument 401 https://hinario-iesa-online.wuaze.com/error.php
+ErrorDocument 403 https://hinario-iesa-online.wuaze.com/error.php
+ErrorDocument 404 https://hinario-iesa-online.wuaze.com/error.php
+ErrorDocument 500 https://hinario-iesa-online.wuaze.com/error.php
+ErrorDocument 503 https://hinario-iesa-online.wuaze.com/error.php

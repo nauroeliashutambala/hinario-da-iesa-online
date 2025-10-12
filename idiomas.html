@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idiomas - Hinário da IESA Online</title>
+    <meta name="description" content="Escolha o idioma para visualizar os hinos da Igreja Evangélica Sinodal de Angola.">
+    <meta name="keywords" content="idiomas, hinário, IESA, Angola, português, umbundo, fiote, kikongo, kwanyama, kimbundo, nianeka, nganguela, cokwe, umbundo">
+    <meta name="author" content="Nauro Elias Hutambala">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="pt-BR">
+    <meta name="theme-color" content="#4CAF50">
+    <meta property="og:title" content="Idiomas - Hinário da IESA Online">
+    <meta property="og:description" content="Escolha o idioma para visualizar os hinos da Igreja Evangélica Sinodal de Angola.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hinario-iesa-online.wuaze.com/idiomas">
+    <meta property="og:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Idiomas - Hinário da IESA Online">
+    <meta name="twitter:description" content="Escolha o idioma para visualizar os hinos da Igreja Evangélica Sinodal de Angola.">
+    <meta name="twitter:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #ff5722;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .back-arrow {
+            font-size: 24px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .list-container {
+            padding: 20px 10px;
+        }
+
+        .list-item {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .list-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .list-item .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .list-item .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="back-arrow">&#8592;</span>
+        <h1>Hinos</h1>
+    </div>
+
+    <div class="list-container" id="list-container">
+        </div>
+
+<script>
+    const hinosData = [
+        { id: 1, name: 'Umbundo', count: 464 },
+        { id: 2, name: 'Portugues', count: 231 },
+        { id: 3, name: 'Nganguela', count: 34 },
+        { id: 4, name: 'Kimbundo', count: 26 },
+        { id: 5, name: 'Kikongo', count: 26 },
+        { id: 6, name: 'Cokwe', count: 39 },
+        { id: 7, name: 'Kwanyama', count: 23 },
+        { id: 8, name: 'Nianeka', count: 20 },
+        { id: 9, name: 'Fiote', count: 20 },
+    ];
+
+    const listContainer = document.getElementById('list-container');
+
+    // Função para transformar nome em slug (minusculas, sem acento, sem espaços)
+    function toSlug(text) {
+        return text
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove acentos
+            .toLowerCase()
+            .replace(/\s+/g, "");            // remove espaços
+    }
+
+    hinosData.forEach(item => {
+        const listItem = document.createElement('div');
+        listItem.className = 'list-item';
+
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = `${item.id} - ${item.name}`;
+
+        const subtitle = document.createElement('div');
+        subtitle.className = 'subtitle';
+        subtitle.textContent = `${item.count} hinos`;
+
+        listItem.appendChild(title);
+        listItem.appendChild(subtitle);
+
+        // Evento de clique -> redireciona para rota amigável
+        listItem.addEventListener("click", () => {
+            const idiomaSlug = toSlug(item.name);
+            window.location.href = `/hinos/${idiomaSlug}`;
+        });
+
+        listContainer.appendChild(listItem);
+    });
+</script>
+<!-- Botão Flutuante do Chat -->
+<style>
+#chat-float-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#chat-float-btn:hover {
+    background: #e64a19;
+}
+</style>
+<a href="/chaty" id="chat-float-btn" title="Abrir Chat">
+    <i class="fas fa-comments"></i>
+</a>
+<!-- Fim Botão Flutuante -->
+</body>
+</html>
