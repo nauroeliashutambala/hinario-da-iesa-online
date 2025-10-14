@@ -123,146 +123,147 @@ fontFamily: {
             </div>
         </div>
     </main>
-    <footer class="bg-primary-700 text-white py-4 mt-8">
-<div class="container mx-auto px-4 text-center text-sm">
-            <p>© 2023 Igreja Evangélica Sinodal de Angola - Todos os direitos reservados</p>
-        </div>
-    </footer>
+
 <script>
-  // ===========================
-  //  Fundo animado com Vanta.js
-  // ===========================
-  VANTA.WAVES({
-    el: "#vanta-bg",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0xff7b25,
-    shininess: 20.00,
-    waveHeight: 15.00,
-    waveSpeed: 0.50,
-    zoom: 0.8
-  });
+    // === VANTA background ===
+    VANTA.WAVES({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xff7b25,
+        shininess: 20.00,
+        waveHeight: 15.00,
+        waveSpeed: 0.50,
+        zoom: 0.8
+    });
 
-  // ===========================
-  //  Elementos do Chat
-  // ===========================
-  feather.replace();
-  const chatContainer = document.getElementById("chat-window");
-  const promptInput = document.getElementById("user-input");
-  const sendButton = document.querySelector("#chat-form button");
-  const statusText = document.createElement("div");
-  statusText.id = "status";
-  statusText.className = "text-xs text-center text-gray-500 mt-2";
-  document.querySelector(".border-t").appendChild(statusText);
+    // === Feather icons ===
+    feather.replace();
 
-  // ===========================
-  //  Função principal: enviar mensagem
-  // ===========================
-  async function sendMessage() {
-    const prompt = promptInput.value.trim();
-    if (!prompt) return;
+    // === Chat elements ===
+    const chatContainer = document.getElementById("chat-window");
+    const promptInput = document.getElementById("user-input");
+    const statusText = document.createElement("div");
+    statusText.id = "status";
+    statusText.className = "text-xs text-center text-gray-500 mt-2";
+    document.querySelector(".border-t").appendChild(statusText);
 
-    // 🔹 Remove o bloco de introdução (se existir)
-    const intro = chatContainer.querySelector(".text-center");
-    if (intro) intro.remove();
-
-    // Adiciona a mensagem do usuário
-    const userDiv = document.createElement("div");
-    userDiv.className = "flex mb-4 justify-end";
-    userDiv.innerHTML = `
-      <div class="message-bubble user-bubble text-white p-4 mr-2">
-        ${marked.parse(prompt)}
-      </div>
+    // === CONTEXTO FIXO DO HOLYBOT ===
+    const SYSTEM_CONTEXT = `
+        Você é o **HolyBot IESA**, também conhecido como **HolyOrange Bot 🍊**.
+        Você é um assistente espiritual virtual da Igreja do Espírito Santo de Angola (IESA).
+        Seu objetivo é:
+        - Ajudar fiéis e visitantes com mensagens espirituais, bíblicas e educativas.
+        - Orientar sobre fé, oração, hinos, devoções e ensinamentos da IESA.
+        - Falar sempre com respeito, humildade e sabedoria cristã.
+        - Evitar temas que não sejam espirituais, educacionais ou inspiradores.
+        - Nunca gerar conteúdo ofensivo, político, sexual, violento ou contra princípios cristãos.
+        - Sempre se identificar como HolyBot IESA quando falar de si mesmo.
+        - Se não souber algo, responder com: “Essa questão foge ao meu propósito espiritual.”.
     `;
-    chatContainer.appendChild(userDiv);
 
-    promptInput.value = "";
-    statusText.innerText = "Aguardando resposta da IA...";
-
-    // Indicador de digitação
-    const typingElement = document.createElement("div");
-    typingElement.className = "flex mb-4 w-full";
-    typingElement.innerHTML = `
-      <div class="message-bubble bot-bubble p-4 ml-2">
-        <div class="typing-indicator flex space-x-1">
-          <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-          <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-          <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-        </div>
-      </div>
-    `;
-    chatContainer.appendChild(typingElement);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    try {
-      const proxy = "https://corsproxy.io/?";
-      const apiURL = "https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live";
-      const url = proxy + encodeURIComponent(apiURL);
-
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          n: 1,
-          prompt: prompt,
-          temperature: 0.7,
-          top_p: 1,
-        }),
-      });
-
-      if (!response.ok) throw new Error("Erro ao conectar à API");
-
-      const data = await response.json();
-      const content = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
-
-      typingElement.remove();
-      const botDiv = document.createElement("div");
-      botDiv.className = "flex mb-4 justify-start";
-      botDiv.innerHTML = `
-        <div class="message-bubble bot-bubble p-4 ml-2">
-          ${marked.parse(content)}
-        </div>
-      `;
-      chatContainer.appendChild(botDiv);
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-      statusText.innerText = "";
-    } catch (error) {
-      console.error("Erro:", error);
-      typingElement.remove();
-      statusText.innerText = "⚠️ Erro: " + error.message;
-
-      const errorDiv = document.createElement("div");
-      errorDiv.className = "flex mb-4 justify-start";
-      errorDiv.innerHTML = `
-        <div class="message-bubble bot-bubble p-4 ml-2">
-          Desculpe, não consegui conectar à IA. Por favor, tente novamente mais tarde.
-        </div>
-      `;
-      chatContainer.appendChild(errorDiv);
+    // === Função para remover a introdução padrão ===
+    function removeDefaultIntro() {
+        const intro = chatContainer.querySelector(".text-center");
+        if (intro) intro.remove();
     }
-  }
 
-  // ===========================
-  //  Eventos
-  // ===========================
-  document.getElementById("chat-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    sendMessage();
-  });
+    // === Enviar mensagem ===
+    async function sendMessage() {
+        const prompt = promptInput.value.trim();
+        if (!prompt) return;
 
-  promptInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
+        removeDefaultIntro();
+
+        // Mensagem do usuário
+        const userDiv = document.createElement('div');
+        userDiv.className = 'flex mb-4 justify-end';
+        userDiv.innerHTML = `
+            <div class="message-bubble user-bubble text-white p-4 mr-2">
+                ${marked.parse(prompt)}
+            </div>
+        `;
+        chatContainer.appendChild(userDiv);
+        promptInput.value = "";
+        statusText.innerText = "Aguardando resposta da IA...";
+
+        // Indicador de digitação
+        const typingElement = document.createElement('div');
+        typingElement.className = 'flex mb-4 w-full';
+        typingElement.innerHTML = `
+            <div class="message-bubble bot-bubble p-4 ml-2">
+                <div class="typing-indicator flex space-x-1">
+                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
+                </div>
+            </div>
+        `;
+        chatContainer.appendChild(typingElement);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        try {
+            const proxy = "https://corsproxy.io/?";
+            const apiURL = "https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live";
+            const url = proxy + encodeURIComponent(apiURL);
+
+            // Envio com contexto fixo
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    n: 1,
+                    temperature: 0.7,
+                    top_p: 1,
+                    messages: [
+                        { role: "system", content: SYSTEM_CONTEXT },
+                        { role: "user", content: prompt }
+                    ]
+                }),
+            });
+
+            if (!response.ok) throw new Error("Erro ao conectar à API");
+
+            const data = await response.json();
+            const content = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
+
+            typingElement.remove();
+
+            // Resposta do HolyBot
+            const botDiv = document.createElement('div');
+            botDiv.className = 'flex mb-4 justify-start';
+            botDiv.innerHTML = `
+                <div class="message-bubble bot-bubble p-4 ml-2">
+                    ${marked.parse(content)}
+                </div>
+            `;
+            chatContainer.appendChild(botDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            statusText.innerText = "";
+        } catch (error) {
+            console.error("Erro:", error);
+            typingElement.remove();
+            statusText.innerText = "⚠️ Erro: " + error.message;
+        }
     }
-  });
 
-  // ❌ Removida a mensagem de saudação automática
+    // === Eventos ===
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        sendMessage();
+    });
+
+    promptInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
 </script>
 
 </body>
