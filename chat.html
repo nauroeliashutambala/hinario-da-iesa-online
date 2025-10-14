@@ -80,51 +80,50 @@ fontFamily: {
                 <img src="http://static.photos/white/200x200/42" alt="IESA Logo" class="w-12 h-12 rounded-full border-2 border-white">
                 <div>
                     <h1 class="text-xl font-bold">HolyBot IESA</h1>
-                    <p class="text-secondary-600 text-sm">Sua assistente IA laranjinha</p>
+                    <p class="text-secondary-600 text-sm">Sua assistente IA</p>
 </div>
             </div>
-            <button class="p-2 rounded-full hover:bg-primary-600 transition">
-<i data-feather="settings"></i>
-            </button>
+            
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-6 max-w-4xl">
-        <div class="bg-secondary-500 rounded-xl shadow-lg overflow-hidden">
-<!-- Chat container -->
-            <div class="chat-container p-4 overflow-y-auto" id="chat-window">
-                <div class="text-center text-gray-500 py-10">
-                    <i data-feather="message-square" class="w-12 h-12 mx-auto text-gray-300 mb-2"></i>
-                    <h3 class="text-lg font-medium">Bem-vindo ao HolyBot IESA</h3>
-                    <p class="mt-1">Como posso ajudar você hoje?</p>
-                </div>
-                
-                <!-- Messages will be inserted here by JavaScript -->
-            </div>
-            
-            <!-- Input area -->
-            <div class="border-t border-gray-200 p-4 bg-gray-50">
-                <form id="chat-form" class="flex space-x-2">
-                <input 
-                    type="text" 
-                    id="user-input" 
-                    placeholder="Digite sua mensagem..." 
-                    class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    autocomplete="off"
-                >
-                <button 
-                    type="submit" 
-                    class="bg-primary-500 hover:bg-primary-600 text-white rounded-full p-3 transition duration-200"
-                >
-<i data-feather="send"></i>
-                    </button>
-                </form>
-                <div class="mt-2 text-xs text-gray-500 text-center">
-                    HolyBot pode ocasionalmente gerar informações incorretas
-                </div>
-            </div>
-        </div>
-    </main>
+    <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-orange-50 to-orange-100">
+  <div class="w-full max-w-4xl flex flex-col bg-white/90 rounded-2xl shadow-xl overflow-hidden border border-orange-200 h-[90vh] md:h-[85vh]">
+    
+    <!-- Janela do Chat -->
+    <div class="flex-1 p-4 overflow-y-auto scroll-smooth" id="chat-window">
+      <div class="text-center text-gray-500 py-10">
+        <i data-feather="message-square" class="w-12 h-12 mx-auto text-gray-300 mb-2"></i>
+        <h3 class="text-lg font-semibold">Bem-vindo ao HolyOrange Bot 🍊</h3>
+        <p class="mt-1 text-sm text-gray-400">Em que posso te ajudar hoje?</p>
+      </div>
+      <!-- As mensagens serão inseridas aqui via JavaScript -->
+    </div>
+
+    <!-- Área de Input -->
+    <div class="border-t border-orange-200 bg-orange-50 p-3 sm:p-4">
+      <form id="chat-form" class="flex items-center space-x-2">
+        <input 
+          type="text" 
+          id="user-input" 
+          placeholder="Digite sua mensagem..." 
+          class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent text-sm sm:text-base"
+          autocomplete="off"
+        >
+        <button 
+          type="submit" 
+          class="bg-orange-500 hover:bg-orange-600 text-white rounded-full p-3 flex items-center justify-center transition duration-200"
+        >
+          <i data-feather="send" class="w-5 h-5"></i>
+        </button>
+      </form>
+      <div class="mt-2 text-[11px] text-gray-400 text-center">
+        ⚠️ O HolyOrange Bot pode ocasionalmente gerar informações imprecisas.
+      </div>
+    </div>
+  </div>
+</main>
+
     <footer class="bg-primary-700 text-white py-4 mt-8">
 <div class="container mx-auto px-4 text-center text-sm">
             <p>© 2023 Igreja Evangélica Sinodal de Angola - Todos os direitos reservados</p>
