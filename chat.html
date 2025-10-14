@@ -1,347 +1,218 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Configurações básicas -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <!-- Título e descrição -->
-  <title>Chat com IA - IESA Assistente Espiritual</title>
-  <meta name="description" content="Converse com a assistente espiritual da Igreja Evangélica Sinodal de Angola (IESA). Tire dúvidas, receba conselhos bíblicos e mensagens de fé.">
-
-  <!-- SEO -->
-  <meta name="keywords" content="chat cristão, IESA, bíblia, fé, Deus, Igreja Evangélica Sinodal de Angola, IA religiosa, oração, Jesus Cristo">
-  <meta name="author" content="Nauro Elias Hutambala">
-
-  <!-- Open Graph / Redes Sociais -->
-  <meta property="og:title" content="Chat com IA - IESA Assistente Espiritual">
-  <meta property="og:description" content="Uma inteligência artificial que fala com amor, sabedoria e base bíblica.">
-  <meta property="og:image" content="https://nauroeliashutambala.github.io/hinario-da-iesa-online/assets/og-image.jpg">
-  <meta property="og:url" content="https://nauroeliashutambala.github.io/hinario-da-iesa-online/chat.html">
-  <meta property="og:type" content="website">
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://nauroeliashutambala.github.io/hinario-da-iesa-online/favicon.png" type="image/png">
-
-  <!-- Fontes e Ícones -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles/chat.css">
-
-  <!-- Cor do tema (mobile browsers) -->
-  <meta name="theme-color" content="#2a4d69">
-
-  <!-- Melhor renderização em dispositivos Apple -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- Segurança básica -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; connect-src *; img-src * data:;">
-
-
-
-
-    <style>
-
-        body {
-
-            font-family: Arial, sans-serif;
-
-            background-color: #f0f0f0;
-
-            margin: 0;
-
-            padding: 0;
-
-            display: flex;
-
-            flex-direction: column;
-
-            height: 100vh;
-
-        }
-
-        .header {
-
-            background-color: #ff5722;
-
-            color: white;
-
-            padding: 15px 20px;
-
-            display: flex;
-
-            align-items: center;
-
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-
-        }
-
-        .header .back-arrow {
-
-            font-size: 24px;
-
-            margin-right: 20px;
-
-            cursor: pointer;
-
-        }
-
-        .header h1 {
-
-            margin: 0;
-
-            font-size: 20px;
-
-            font-weight: bold;
-
-        }
-
-        .chat-container {
-
-            flex: 1;
-
-            padding: 20px;
-
-            overflow-y: auto;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 15px;
-
-        }
-
-        .message {
-
-            max-width: 80%;
-
-            padding: 10px 15px;
-
-            border-radius: 20px;
-
-            word-wrap: break-word;
-
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-
-        }
-
-        .message.user {
-
-            align-self: flex-end;
-
-            background-color: #fff;
-
-            color: #333;
-
-            border-bottom-right-radius: 5px;
-
-        }
-
-        .message.ia {
-
-            align-self: flex-start;
-
-            background-color: #e0e0e0;
-
-            color: #333;
-
-            border-bottom-left-radius: 5px;
-
-        }
-
-        .message.ia span.sender {
-
-            font-weight: bold;
-
-            color: #ff5722;
-
-        }
-
-        .input-container {
-
-            display: flex;
-
-            padding: 10px;
-
-            background-color: #fff;
-
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-
-            border-top: 1px solid #ccc;
-
-        }
-
-        .input-container input {
-
-            flex: 1;
-
-            border: 1px solid #ddd;
-
-            border-radius: 20px;
-
-            padding: 10px 15px;
-
-            font-size: 16px;
-
-            outline: none;
-
-        }
-
-        .input-container button {
-
-            background-color: #ff5722;
-
-            color: white;
-
-            border: none;
-
-            border-radius: 50%;
-
-            width: 45px;
-
-            height: 45px;
-
-            margin-left: 10px;
-
-            font-size: 20px;
-
-            cursor: pointer;
-
-            transition: background-color 0.3s;
-
-        }
-
-        .input-container button:hover {
-
-            background-color: #e64a19;
-
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat com IA - IESA Assistente</title>
+
+  <style>
+    :root {
+      --primary: #ff7a00;
+      --primary-dark: #e56a00;
+      --bg: #ffffff;
+      --surface: #f9f9f9;
+      --text: #333333;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Roboto", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      width: 100%;
+      padding: 16px;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    #chat-container {
+      flex: 1;
+      width: 95%;
+      max-width: 520px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-top: 20px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin: 8px 0;
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      max-width: 80%;
+      word-wrap: break-word;
+      line-height: 1.5;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .user {
+      background: var(--primary);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+
+    .bot {
+      background: #ffffff;
+      color: var(--text);
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      border: 1px solid #eee;
+    }
+
+    #input-area {
+      width: 95%;
+      max-width: 520px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0 18px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 8px;
+    }
+
+    #prompt {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      border-radius: var(--radius);
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    #send {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 10px 18px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 15px;
+      transition: background 0.3s, transform 0.1s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    #send:hover {
+      background: var(--primary-dark);
+    }
+
+    #send:active {
+      transform: scale(0.98);
+    }
+
+    #status {
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+      margin-bottom: 8px;
+      height: 18px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ddd;
+      border-radius: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <div class="chat-wrapper">
-    <!-- Cabeçalho -->
-    <header class="header">
-      <span class="back-arrow" onclick="window.history.back()">←</span>
-      <h1>IA Assistente</h1>
-    </header>
+  <header>IESA Assistente IA</header>
 
-    <!-- Área do chat -->
-    <main class="chat-container" id="chat-container">
-      <!-- Mensagens serão inseridas aqui via JS -->
-    </main>
+  <div id="chat-container"></div>
 
-    <!-- Campo de entrada -->
-    <div class="input-container">
-      <input 
-        type="text" 
-        id="user-input" 
-        placeholder="Digite sua mensagem..." 
-        autocomplete="off" 
-      />
-      <button id="send-btn" title="Enviar mensagem">
-        <i class="fas fa-paper-plane"></i>
-      </button>
-    </div>
+  <p id="status"></p>
+
+  <div id="input-area">
+    <input type="text" id="prompt" placeholder="Digite a sua mensagem..." />
+    <button id="send">Enviar</button>
   </div>
 
-  <!-- Scripts -->
-  <script src="scripts/chat.js"></script>
-</body>
+  <script>
+    const chatContainer = document.getElementById("chat-container");
+    const promptInput = document.getElementById("prompt");
+    const sendButton = document.getElementById("send");
+    const statusText = document.getElementById("status");
 
-<script>
-const chatContainer = document.getElementById('chat-container');
-const userInput = document.getElementById('user-input');
-const sendBtn = document.getElementById('send-btn');
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = "message " + sender;
+      msg.textContent = text;
+      chatContainer.appendChild(msg);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
 
-let mensagens = [
-  {
-    role: "system",
-    content: "Tu és uma IA religiosa da Igreja Evangélica Sinodal de Angola (IESA), criada por Nauro Elias Hutambala. Fala com sabedoria bíblica, humildade e amor cristão, respondendo com base na Bíblia."
-  }
-];
+    async function sendMessage() {
+      const prompt = promptInput.value.trim();
+      if (!prompt) return;
 
-// Adiciona mensagens no chat
-function addMessage(text, sender) {
-  const messageElement = document.createElement('div');
-  messageElement.classList.add('message', sender);
-  messageElement.innerHTML =
-    sender === 'ia'
-      ? `<span class="sender"></span> ${text}`
-      : text;
-  chatContainer.appendChild(messageElement);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
+      addMessage(prompt, "user");
+      promptInput.value = "";
+      statusText.innerText = "Enviando...";
 
-// Envia prompt direto à API remota (sem PHP)
-async function getIaResponse(message) {
-  addMessage("...", "ia"); // Indicador de "pensando"
+      try {
+        const response = await fetch("https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            n: 1,
+            prompt: prompt,
+            temperature: 1,
+            top_p: 1,
+          }),
+        });
 
-  mensagens.push({ role: "user", content: message });
+        if (!response.ok) throw new Error("Erro de resposta da API");
 
-  // Criação do prompt com base na lógica do PHP
-  let prompt = "";
-  for (const m of mensagens) {
-    prompt += `${m.role.charAt(0).toUpperCase() + m.role.slice(1)}: ${m.content}\n`;
-  }
-  prompt += "\nResponde de forma cristã, com amor e humildade, como uma IA da IESA. Se possível, cita versículos que reforcem a mensagem.";
+        const data = await response.json();
+        const content = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
+        addMessage(content, "bot");
+        statusText.innerText = "";
+      } catch (error) {
+        console.error(error);
+        statusText.innerText = "Erro de conexão: " + error.message;
+      }
+    }
 
-  try {
-    const body = {
-      n: 1,
-      prompt,
-      temperature: 0.4,
-      top_p: 0.9
-    };
-
-    const response = await fetch("https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+    sendButton.addEventListener("click", sendMessage);
+    promptInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
     });
-
-    const data = await response.json();
-    document.querySelector('.message.ia:last-child')?.remove();
-
-    const resposta = data?.choices?.[0]?.message?.content || "Desculpe, ocorreu um erro ao gerar a resposta.";
-    addMessage(resposta, "ia");
-    mensagens.push({ role: "assistant", content: resposta });
-
-  } catch (error) {
-    document.querySelector('.message.ia:last-child')?.remove();
-    addMessage("Erro de conexão com o servidor da IA. 🙏🏾", "ia");
-    console.error("Erro:", error);
-  }
-}
-
-// Envia a mensagem
-function handleSendMessage() {
-  const message = userInput.value.trim();
-  if (message !== "") {
-    addMessage(message, "user");
-    getIaResponse(message);
-    userInput.value = "";
-  }
-}
-
-sendBtn.addEventListener("click", handleSendMessage);
-userInput.addEventListener("keypress", (event) => {
-  if (event.key === "Enter") handleSendMessage();
-});
-
-window.onload = () => {
-  addMessage(
-    "Olá! Sou uma assistente da IESA, criada para te orientar espiritualmente e esclarecer dúvidas religiosas. Que o Senhor te abençoe! 🙏🏾",
-    "ia"
-  );
-};
-</script>
-
+  </script>
+</body>
+</html>
