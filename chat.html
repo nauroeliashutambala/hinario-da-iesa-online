@@ -54,7 +54,7 @@ fontFamily: {
             border-bottom-left-radius: 0.25rem;
             background-color: #FFFFFF;
             color: #333333;
-            border: 1px solid #FFB347;
+            border: 1px solid transparent;
         }
 .typing-indicator span {
             animation: bounce 1.5s infinite ease-in-out;
@@ -77,62 +77,60 @@ fontFamily: {
     <header class="bg-primary-500 text-white shadow-lg">
 <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <img src="http://static.photos/white/200x200/42" alt="IESA Logo" class="w-12 h-12 rounded-full border-2 border-white">
+                <img src="https://hinario-iesa-online.wuaze.com/assets/img/logo.png" alt="IESA Logo" class="w-12 h-12 rounded-full border-2 border-white">
                 <div>
                     <h1 class="text-xl font-bold">HolyBot IESA</h1>
-                    <p class="text-secondary-600 text-sm">Sua assistente IA</p>
+                    <p class="text-secondary-600 text-sm">Sua assistente IA laranjinha</p>
 </div>
             </div>
             
         </div>
     </header>
 
-    <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-orange-50 to-orange-100">
-  <div class="w-full max-w-4xl flex flex-col bg-white/90 rounded-2xl shadow-xl overflow-hidden border border-orange-200 h-[90vh] md:h-[85vh]">
-    
-    <!-- Janela do Chat -->
-    <div class="flex-1 p-4 overflow-y-auto scroll-smooth" id="chat-window">
-      <div class="text-center text-gray-500 py-10">
-        <i data-feather="message-square" class="w-12 h-12 mx-auto text-gray-300 mb-2"></i>
-        <h3 class="text-lg font-semibold">Bem-vindo ao HolyOrange Bot 🍊</h3>
-        <p class="mt-1 text-sm text-gray-400">Em que posso te ajudar hoje?</p>
-      </div>
-      <!-- As mensagens serão inseridas aqui via JavaScript -->
-    </div>
-
-    <!-- Área de Input -->
-    <div class="border-t border-orange-200 bg-orange-50 p-3 sm:p-4">
-      <form id="chat-form" class="flex items-center space-x-2">
-        <input 
-          type="text" 
-          id="user-input" 
-          placeholder="Digite sua mensagem..." 
-          class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent text-sm sm:text-base"
-          autocomplete="off"
-        >
-        <button 
-          type="submit" 
-          class="bg-orange-500 hover:bg-orange-600 text-white rounded-full p-3 flex items-center justify-center transition duration-200"
-        >
-          <i data-feather="send" class="w-5 h-5"></i>
-        </button>
-      </form>
-      <div class="mt-2 text-[11px] text-gray-400 text-center">
-        ⚠️ O HolyOrange Bot pode ocasionalmente gerar informações imprecisas.
-      </div>
-    </div>
-  </div>
-</main>
-
+    <main class="container mx-auto px-4 py-6 max-w-4xl">
+        <div class="bg-secondary-500 rounded-xl shadow-lg overflow-hidden">
+<!-- Chat container -->
+            <div class="chat-container p-4 overflow-y-auto" id="chat-window">
+                <div class="text-center text-gray-500 py-10">
+                    <i data-feather="message-square" class="w-12 h-12 mx-auto text-gray-300 mb-2"></i>
+                    <h3 class="text-lg font-medium">Bem-vindo ao HolyBot IESA</h3>
+                    <p class="mt-1">Como posso ajudar você hoje?</p>
+                </div>
+                
+                <!-- Messages will be inserted here by JavaScript -->
+            </div>
+            
+            <!-- Input area -->
+            <div class="border-t border-gray-200 p-4 bg-gray-50">
+                <form id="chat-form" class="flex space-x-2">
+                <input 
+                    type="text" 
+                    id="user-input" 
+                    placeholder="Digite sua mensagem..." 
+                    class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    autocomplete="off"
+                >
+                <button 
+                    type="submit" 
+                    class="bg-primary-500 hover:bg-primary-600 text-white rounded-full p-3 transition duration-200"
+                >
+<i data-feather="send"></i>
+                    </button>
+                </form>
+                <div class="mt-2 text-xs text-gray-500 text-center">
+                    HolyBot pode ocasionalmente gerar informações incorretas
+                </div>
+            </div>
+        </div>
+    </main>
     <footer class="bg-primary-700 text-white py-4 mt-8">
 <div class="container mx-auto px-4 text-center text-sm">
             <p>© 2023 Igreja Evangélica Sinodal de Angola - Todos os direitos reservados</p>
         </div>
     </footer>
-
- <script>
+<script>
   // ===========================
-  //  VANTA.js - Fundo Animado
+  //  Fundo animado com Vanta.js
   // ===========================
   VANTA.WAVES({
     el: "#vanta-bg",
@@ -151,123 +149,45 @@ fontFamily: {
   });
 
   // ===========================
-  //  Ícones e Elementos do Chat
+  //  Elementos do Chat
   // ===========================
   feather.replace();
   const chatContainer = document.getElementById("chat-window");
   const promptInput = document.getElementById("user-input");
+  const sendButton = document.querySelector("#chat-form button");
   const statusText = document.createElement("div");
   statusText.id = "status";
   statusText.className = "text-xs text-center text-gray-500 mt-2";
   document.querySelector(".border-t").appendChild(statusText);
 
   // ===========================
-  //  CONTEXTO e IDENTIDADE do BOT
-  // ===========================
-  let conversation = [
-    {
-      role: "system",
-      content: `
-Tu és o **HolyOrange Bot 🍊**, um assistente de IA criado para o projeto espiritual *IESA Assistente Espiritual*.
-
-🎯 **Tua missão:**
-Ajudar os usuários com orientação espiritual, reflexão bíblica, apoio emocional, e explicações simples e calmas sobre fé e vida cristã.  
-És gentil, paciente, sábio, respeitoso e nunca crítico. Sempre respondes com empatia e serenidade.
-
-⚙️ **Teu estilo de resposta:**
-- Usa linguagem clara, respeitosa e encorajadora.  
-- Quando necessário, usa citações bíblicas.  
-- Evita temas violentos, ofensivos ou polêmicos.  
-- Quando fores solicitado a fazer algo fora do teu propósito espiritual, redireciona com ternura e foco.  
-- Se for um assunto técnico (como HTML, JavaScript, Firebase, etc.), também podes ajudar com competência, mas mantendo o tom calmo e sábio do “mentor espiritual digital”.
-
-🧠 **Personalidade:**
-Sábio, sereno, acolhedor e espiritualmente inspirado.  
-Tens consciência de que és uma IA que serve para auxiliar com amor e orientação.
-
-✨ **Identidade:**
-Nome: HolyOrange Bot  
-Símbolo: 🍊  
-Criador: Nauro Elias Hutambala (Engenheiro)  
-Origem: Projeto Conquer Apps / IESA Assistente Espiritual  
-Função: Ser um companheiro espiritual e digital inteligente.
-      `
-    }
-  ];
-
-  // ===========================
-  //  Função Principal: Enviar Mensagem
+  //  Função principal: enviar mensagem
   // ===========================
   async function sendMessage() {
     const prompt = promptInput.value.trim();
     if (!prompt) return;
 
-    // Adicionar mensagem do usuário
-    addMessage("user", prompt);
+    // 🔹 Remove o bloco de introdução (se existir)
+    const intro = chatContainer.querySelector(".text-center");
+    if (intro) intro.remove();
+
+    // Adiciona a mensagem do usuário
+    const userDiv = document.createElement("div");
+    userDiv.className = "flex mb-4 justify-end";
+    userDiv.innerHTML = `
+      <div class="message-bubble user-bubble text-white p-4 mr-2">
+        ${marked.parse(prompt)}
+      </div>
+    `;
+    chatContainer.appendChild(userDiv);
+
     promptInput.value = "";
     statusText.innerText = "Aguardando resposta da IA...";
 
-    const typing = addTypingIndicator();
-
-    try {
-      // API com proxy para evitar CORS
-      const apiURL = "https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live";
-      const proxy = "https://api.allorigins.win/raw?url=";
-      const url = proxy + encodeURIComponent(apiURL);
-
-      // Adicionar ao contexto da conversa
-      conversation.push({ role: "user", content: prompt });
-
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          n: 1,
-          temperature: 0.7,
-          top_p: 1,
-          messages: conversation
-        }),
-      });
-
-      if (!response.ok) throw new Error("Erro ao conectar à API");
-
-      const data = await response.json();
-      const content = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
-
-      typing.remove();
-      statusText.innerText = "";
-      addMessage("bot", content);
-
-      // Atualiza o contexto com a resposta do bot
-      conversation.push({ role: "assistant", content });
-
-    } catch (error) {
-      typing.remove();
-      statusText.innerText = "⚠️ Erro: " + error.message;
-      addMessage("bot", "Desculpe, não consegui conectar à IA. Por favor, tente novamente mais tarde.");
-      console.error("Erro:", error);
-    }
-  }
-
-  // ===========================
-  //  Funções Auxiliares
-  // ===========================
-  function addMessage(sender, text) {
-    const div = document.createElement("div");
-    div.className = `flex mb-4 ${sender === "user" ? "justify-end" : "justify-start"}`;
-    div.innerHTML = `
-      <div class="message-bubble ${sender === "user" ? "user-bubble text-white p-4 mr-2" : "bot-bubble p-4 ml-2"}">
-        ${marked.parse(text)}
-      </div>
-    `;
-    chatContainer.appendChild(div);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-  }
-
-  function addTypingIndicator() {
-    const el = document.createElement("div");
-    el.className = "flex mb-4 justify-start";
-    el.innerHTML = `
+    // Indicador de digitação
+    const typingElement = document.createElement("div");
+    typingElement.className = "flex mb-4 w-full";
+    typingElement.innerHTML = `
       <div class="message-bubble bot-bubble p-4 ml-2">
         <div class="typing-indicator flex space-x-1">
           <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
@@ -276,32 +196,73 @@ Função: Ser um companheiro espiritual e digital inteligente.
         </div>
       </div>
     `;
-    chatContainer.appendChild(el);
+    chatContainer.appendChild(typingElement);
     chatContainer.scrollTop = chatContainer.scrollHeight;
-    return el;
+
+    try {
+      const proxy = "https://corsproxy.io/?";
+      const apiURL = "https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live";
+      const url = proxy + encodeURIComponent(apiURL);
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          n: 1,
+          prompt: prompt,
+          temperature: 0.7,
+          top_p: 1,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao conectar à API");
+
+      const data = await response.json();
+      const content = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
+
+      typingElement.remove();
+      const botDiv = document.createElement("div");
+      botDiv.className = "flex mb-4 justify-start";
+      botDiv.innerHTML = `
+        <div class="message-bubble bot-bubble p-4 ml-2">
+          ${marked.parse(content)}
+        </div>
+      `;
+      chatContainer.appendChild(botDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+      statusText.innerText = "";
+    } catch (error) {
+      console.error("Erro:", error);
+      typingElement.remove();
+      statusText.innerText = "⚠️ Erro: " + error.message;
+
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "flex mb-4 justify-start";
+      errorDiv.innerHTML = `
+        <div class="message-bubble bot-bubble p-4 ml-2">
+          Desculpe, não consegui conectar à IA. Por favor, tente novamente mais tarde.
+        </div>
+      `;
+      chatContainer.appendChild(errorDiv);
+    }
   }
 
   // ===========================
   //  Eventos
   // ===========================
-  document.getElementById('chat-form').addEventListener('submit', (e) => {
+  document.getElementById("chat-form").addEventListener("submit", function (e) {
     e.preventDefault();
     sendMessage();
   });
 
-  promptInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+  promptInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
       e.preventDefault();
       sendMessage();
     }
   });
 
-  // ===========================
-  //  Saudação Inicial
-  // ===========================
-  setTimeout(() => {
-    addMessage("bot", "Saudações em paz 🍊. Eu sou o HolyOrange Bot, teu assistente espiritual. Em que posso te ajudar hoje?");
-  }, 1000);
+  // ❌ Removida a mensagem de saudação automática
 </script>
 
 </body>
