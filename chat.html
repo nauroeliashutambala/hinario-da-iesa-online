@@ -1,269 +1,200 @@
 <!DOCTYPE html>
-<html lang="pt" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HolyBot - Chat IA IESA</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            500: '#FF7B25',
-                            600: '#E56A1A',
-                            700: '#CC5910'
-                        },
-                        secondary: {
-                            500: '#FFFFFF',
-                            600: '#F5F5F5',
-                            700: '#E0E0E0'
-                        },
-                        accent: {
-                            500: '#FFB347',
-                            600: '#FFA033'
-                        }
-                    },
-fontFamily: {
-                        sans: ['Poppins', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        .chat-container {
-            height: calc(100vh - 180px);
-        }
-        .message-bubble {
-            max-width: 80%;
-            border-radius: 1.25rem;
-        }
-        .user-bubble {
-            border-bottom-right-radius: 0.25rem;
-            background-color: #FF7B25;
-        }
-        .bot-bubble {
-            border-bottom-left-radius: 0.25rem;
-            background-color: #FFFFFF;
-            color: #333333;
-            border: 1px solid transparent;
-        }
-.typing-indicator span {
-            animation: bounce 1.5s infinite ease-in-out;
-        }
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        @keyframes bounce {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat com IA - IESA Assistente</title>
+  <style>
+    :root {
+      --laranja: #ff7a00;
+      --laranja-escuro: #e06700;
+      --cinza: #f2f2f2;
+      --texto: #333;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Roboto", Arial, sans-serif;
+      background: var(--cinza);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    header {
+      background: var(--laranja);
+      width: 100%;
+      text-align: center;
+      padding: 15px 0;
+      color: white;
+      font-size: 22px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    #chat-container {
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      height: 70vh;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    .message {
+      margin: 8px 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 75%;
+      word-wrap: break-word;
+      line-height: 1.5;
+      font-size: 15px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .user {
+      background: var(--laranja);
+      color: white;
+      align-self: flex-end;
+    }
+
+    .bot {
+      background: #f8f8f8;
+      color: var(--texto);
+      border: 1px solid #eee;
+      align-self: flex-start;
+    }
+
+    #input-area {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    #prompt {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    #prompt:focus {
+      border-color: var(--laranja);
+    }
+
+    #send {
+      background: var(--laranja);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0 18px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.1s;
+    }
+
+    #send:hover {
+      background: var(--laranja-escuro);
+      transform: scale(1.03);
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans">
-    <div id="vanta-bg" class="fixed inset-0 -z-10 opacity-10"></div>
-    
-    <header class="bg-primary-500 text-white shadow-lg">
-<div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <img src="https://hinario-iesa-online.wuaze.com/assets/img/logo.png" alt="IESA Logo" class="w-12 h-12 rounded-full border-2 border-white">
-                <div>
-                    <h1 class="text-xl font-bold">HolyBot IESA</h1>
-                    <p class="text-secondary-600 text-sm">Sua assistente IA laranjinha</p>
-</div>
-            </div>
-            
-        </div>
-    </header>
+<body>
+  <header>💬 Chat com IA - IESA Assistente</header>
 
-    <main class="container mx-auto px-4 py-6 max-w-4xl">
-        <div class="bg-secondary-500 rounded-xl shadow-lg overflow-hidden">
-<!-- Chat container -->
-            <div class="chat-container p-4 overflow-y-auto" id="chat-window">
-                <div class="text-center text-gray-500 py-10">
-                    <i data-feather="message-square" class="w-12 h-12 mx-auto text-gray-300 mb-2"></i>
-                    <h3 class="text-lg font-medium">Bem-vindo ao HolyBot IESA</h3>
-                    <p class="mt-1">Como posso ajudar você hoje?</p>
-                </div>
-                
-                <!-- Messages will be inserted here by JavaScript -->
-            </div>
-            
-            <!-- Input area -->
-            <div class="border-t border-gray-200 p-4 bg-gray-50">
-                <form id="chat-form" class="flex space-x-2">
-                <input 
-                    type="text" 
-                    id="user-input" 
-                    placeholder="Digite sua mensagem..." 
-                    class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    autocomplete="off"
-                >
-                <button 
-                    type="submit" 
-                    class="bg-primary-500 hover:bg-primary-600 text-white rounded-full p-3 transition duration-200"
-                >
-<i data-feather="send"></i>
-                    </button>
-                </form>
-                <div class="mt-2 text-xs text-gray-500 text-center">
-                    HolyBot pode ocasionalmente gerar informações incorretas
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer class="bg-primary-700 text-white py-4 mt-8">
-<div class="container mx-auto px-4 text-center text-sm">
-            <p>© 2023 Igreja Evangélica Sinodal de Angola - Todos os direitos reservados</p>
-        </div>
-    </footer>
-<script>
-  // ===========================
-  //  Fundo animado com Vanta.js
-  // ===========================
-  VANTA.WAVES({
-    el: "#vanta-bg",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0xff7b25,
-    shininess: 20.00,
-    waveHeight: 15.00,
-    waveSpeed: 0.50,
-    zoom: 0.8
-  });
+  <div id="chat-container"></div>
 
-  // ===========================
-  //  Elementos do Chat
-  // ===========================
-  feather.replace();
-  const chatContainer = document.getElementById("chat-window");
-  const promptInput = document.getElementById("user-input");
-  const sendButton = document.querySelector("#chat-form button");
-  const statusText = document.createElement("div");
-  statusText.id = "status";
-  statusText.className = "text-xs text-center text-gray-500 mt-2";
-  document.querySelector(".border-t").appendChild(statusText);
+  <div id="input-area">
+    <input type="text" id="prompt" placeholder="Digite sua mensagem..." />
+    <button id="send">Enviar</button>
+  </div>
 
-  // ===========================
-  //  Função principal: enviar mensagem
-  // ===========================
-  async function sendMessage() {
-    const prompt = promptInput.value.trim();
-    if (!prompt) return;
+  <p id="status"></p>
 
-    // 🔹 Remove o bloco de introdução (se existir)
-    const intro = chatContainer.querySelector(".text-center");
-    if (intro) intro.remove();
+  <script>
+    const chatContainer = document.getElementById("chat-container");
+    const promptInput = document.getElementById("prompt");
+    const sendButton = document.getElementById("send");
+    const statusText = document.getElementById("status");
 
-    // Adiciona a mensagem do usuário
-    const userDiv = document.createElement("div");
-    userDiv.className = "flex mb-4 justify-end";
-    userDiv.innerHTML = `
-      <div class="message-bubble user-bubble text-white p-4 mr-2">
-        ${marked.parse(prompt)}
-      </div>
-    `;
-    chatContainer.appendChild(userDiv);
-
-    promptInput.value = "";
-    statusText.innerText = "Aguardando resposta da IA...";
-
-    // Indicador de digitação
-    const typingElement = document.createElement("div");
-    typingElement.className = "flex mb-4 w-full";
-    typingElement.innerHTML = `
-      <div class="message-bubble bot-bubble p-4 ml-2">
-        <div class="typing-indicator flex space-x-1">
-          <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-          <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-          <span class="w-2 h-2 bg-gray-400 rounded-full"></span>
-        </div>
-      </div>
-    `;
-    chatContainer.appendChild(typingElement);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    try {
-      const proxy = "https://corsproxy.io/?";
-      const apiURL = "https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live";
-      const url = proxy + encodeURIComponent(apiURL);
-
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          n: 1,
-          prompt: prompt,
-          temperature: 0.7,
-          top_p: 1,
-        }),
-      });
-
-      if (!response.ok) throw new Error("Erro ao conectar à API");
-
-      const data = await response.json();
-      const content = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
-
-      typingElement.remove();
-      const botDiv = document.createElement("div");
-      botDiv.className = "flex mb-4 justify-start";
-      botDiv.innerHTML = `
-        <div class="message-bubble bot-bubble p-4 ml-2">
-          ${marked.parse(content)}
-        </div>
-      `;
-      chatContainer.appendChild(botDiv);
+    // Função para adicionar mensagens
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = "message " + sender;
+      msg.textContent = text;
+      chatContainer.appendChild(msg);
       chatContainer.scrollTop = chatContainer.scrollHeight;
-      statusText.innerText = "";
-    } catch (error) {
-      console.error("Erro:", error);
-      typingElement.remove();
-      statusText.innerText = "⚠️ Erro: " + error.message;
-
-      const errorDiv = document.createElement("div");
-      errorDiv.className = "flex mb-4 justify-start";
-      errorDiv.innerHTML = `
-        <div class="message-bubble bot-bubble p-4 ml-2">
-          Desculpe, não consegui conectar à IA. Por favor, tente novamente mais tarde.
-        </div>
-      `;
-      chatContainer.appendChild(errorDiv);
     }
-  }
 
-  // ===========================
-  //  Eventos
-  // ===========================
-  document.getElementById("chat-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    sendMessage();
-  });
+    async function sendMessage() {
+      const prompt = promptInput.value.trim();
+      if (!prompt) return;
 
-  promptInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
+      addMessage(prompt, "user");
+      promptInput.value = "";
+      statusText.innerText = "Aguardando resposta da IA...";
+
+      try {
+        const proxy = "https://corsproxy.io/?";
+        const apiURL = "https://us-central1-conquer-apps-2ad61.cloudfunctions.net/prod/api.live";
+        const url = proxy + encodeURIComponent(apiURL);
+
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            n: 1,
+            prompt: prompt,
+            temperature: 0.7,
+            top_p: 1,
+          }),
+        });
+
+        if (!response.ok) throw new Error("Erro ao conectar à API");
+
+        const data = await response.json();
+        const content =
+          data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
+
+        addMessage(content, "bot");
+        statusText.innerText = "";
+      } catch (error) {
+        console.error("Erro:", error);
+        statusText.innerText = "⚠️ Erro: " + error.message;
+        addMessage("Desculpe, não consegui conectar à IA.", "bot");
+      }
     }
-  });
 
-  // ❌ Removida a mensagem de saudação automática
-</script>
-
+    sendButton.addEventListener("click", sendMessage);
+    promptInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
 </body>
 </html>
