@@ -13,16 +13,13 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            background: #ffffff;
             min-height: 100vh;
-            padding: 20px;
         }
 
         .container {
-            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             overflow: hidden;
         }
@@ -60,41 +57,10 @@
             font-size: 1.4em;
         }
 
-        .language-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
-        }
 
-        .lang-btn {
-            padding: 15px 30px;
-            border: 2px solid #e67e22;
-            background: white;
-            color: #e67e22;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            min-width: 150px;
-        }
-
-        .lang-btn:hover {
-            background: #e67e22;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);
-        }
-
-        .lang-btn.active {
-            background: #e67e22;
-            color: white;
-            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
-        }
 
         .content-section {
-            padding: 30px;
+            padding: 0px;
         }
 
         .chapters-container {
@@ -263,57 +229,22 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            
-            .header {
-                padding: 30px 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .language-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .lang-btn {
-                width: 100%;
-                max-width: 250px;
-            }
-            
-            .lessons-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .chapter-header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📖 Livro de Lições Bíblicas</h1>
+            <h1>Livro de Lições Bíblicas</h1>
             <p>Estudo Bíblico em Português e Umbundo</p>
         </div>
+<div class="language-selector">
+    <div class="language-buttons">
+        <button class="lang-btn active" data-lang="0">Português </button>
+        <button class="lang-btn" data-lang="1">Umbundo </button>
+    </div>
+</div>
 
-        <div class="language-selector">
-            <h2>🌍 Escolha o Idioma</h2>
-            <div class="language-buttons">
-                <button class="lang-btn active" data-lang="0">Português 🇧🇷</button>
-                <button class="lang-btn" data-lang="1">Umbundo 🇦🇴</button>
-            </div>
-        </div>
 
         <div class="content-section fade-in" id="contentSection">
             <div class="loading" id="loading">
@@ -344,13 +275,13 @@ const langButtons = document.querySelectorAll('.lang-btn');
 function saveSelectedLesson(lessonObject) {
     // Salvar no localStorage
     localStorage.setItem('selectedLesson', JSON.stringify(lessonObject));
-    
+
     // Também salvar em sessionStorage como backup
     sessionStorage.setItem('selectedLesson', JSON.stringify(lessonObject));
-    
+
     // Salvar em cookie (para compatibilidade extra)
     document.cookie = `selectedLesson=${encodeURIComponent(JSON.stringify(lessonObject))}; path=/; max-age=3600`; // 1 hora
-    
+
     console.log('Lição salva:', lessonObject);
 }
 
@@ -362,7 +293,7 @@ function redirectToReadPage() {
         alert('Nenhuma lição selecionada!');
         return;
     }
-    
+
     // Redirecionar para a página read
     window.location.href = 'read/';
 }
@@ -374,19 +305,19 @@ async function loadLessons() {
         errorElement.classList.add('hidden');
         chaptersContainer.classList.add('hidden');
 
-        const response = await fetch('licoes.json');
-        
+        const response = await fetch('https://nauroeliashutambala.github.io/hinario-da-iesa-online/fe-evangelica/licoes.json');
+
         if (!response.ok) {
             throw new Error('Erro ao carregar o arquivo JSON');
         }
-        
+
         allLessons = await response.json();
         groupLessonsByChapter();
         renderChapters();
-        
+
         loadingElement.classList.add('hidden');
         chaptersContainer.classList.remove('hidden');
-        
+
     } catch (error) {
         console.error('Erro:', error);
         loadingElement.classList.add('hidden');
@@ -397,10 +328,10 @@ async function loadLessons() {
 // Agrupar lições por capítulo
 function groupLessonsByChapter() {
     groupedChapters = {};
-    
+
     allLessons.forEach(lesson => {
         const chapterNum = lesson.capitulo;
-        
+
         if (!groupedChapters[chapterNum]) {
             groupedChapters[chapterNum] = {
                 capitulo: chapterNum,
@@ -408,7 +339,7 @@ function groupLessonsByChapter() {
                 licoes: []
             };
         }
-        
+
         // Adicionar o objeto completo da lição para ter todos os dados
         groupedChapters[chapterNum].licoes.push(lesson);
     });
@@ -417,9 +348,9 @@ function groupLessonsByChapter() {
 // Renderizar capítulos
 function renderChapters() {
     chaptersContainer.innerHTML = '';
-    
+
     const chapters = Object.values(groupedChapters).sort((a, b) => a.capitulo - b.capitulo);
-    
+
     chapters.forEach(chapter => {
         const chapterCard = document.createElement('div');
         chapterCard.className = 'chapter-card fade-in';
@@ -442,41 +373,41 @@ function renderChapters() {
                 </div>
             </div>
         `;
-        
+
         // Adicionar event listeners para cada card de lição
         chapterCard.querySelectorAll('.lesson-card').forEach(card => {
             card.addEventListener('click', function() {
                 const lessonData = JSON.parse(this.dataset.lesson);
-                
+
                 // Salvar a lição selecionada
                 saveSelectedLesson(lessonData);
-                
+
                 // Feedback visual
                 this.style.background = '#ff9800';
                 this.style.color = 'white';
                 this.style.transform = 'scale(0.98)';
-                
+
                 setTimeout(() => {
                     this.style.background = '';
                     this.style.color = '';
                     this.style.transform = '';
-                    
+
                     // Redirecionar após o feedback visual
                     redirectToReadPage();
                 }, 300);
             });
-            
+
             // Efeito hover melhorado
             card.addEventListener('mouseenter', function() {
                 this.style.cursor = 'pointer';
                 this.style.boxShadow = '0 8px 25px rgba(230, 126, 34, 0.4)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.boxShadow = '';
             });
         });
-        
+
         chaptersContainer.appendChild(chapterCard);
     });
 }
@@ -485,7 +416,7 @@ function renderChapters() {
 function updateLanguage(langIndex) {
     currentLanguage = langIndex;
     renderChapters();
-    
+
     // Atualizar botões de idioma
     langButtons.forEach((btn, index) => {
         if (index === langIndex) {
