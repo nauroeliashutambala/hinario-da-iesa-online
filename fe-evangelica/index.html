@@ -217,7 +217,47 @@
         .fade-in {
             animation: fadeIn 0.6s ease-in;
         }
+.lesson-card {
+    background: #fff8e1;
+    border: 1px solid #ffd54f;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
+.lesson-card::after {
+    content: '🔍 Ler';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e67e22;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lesson-card:hover::after {
+    opacity: 1;
+}
+
+.lesson-card:hover {
+    background: #ffecb3;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 167, 38, 0.2);
+    border-color: #ffa726;
+}
+
+.lesson-preview {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+}
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -289,121 +329,202 @@
     </div>
 
     <script>
-        // Variáveis globais
-        let currentLanguage = 0; // 0 = Português, 1 = Umbundo
-        let allLessons = [];
-        let groupedChapters = {};
+       // Variáveis globais
+let currentLanguage = 0; // 0 = Português, 1 = Umbundo
+let allLessons = [];
+let groupedChapters = {};
 
-        // Elementos DOM
-        const chaptersContainer = document.getElementById('chaptersContainer');
-        const loadingElement = document.getElementById('loading');
-        const errorElement = document.getElementById('error');
-        const langButtons = document.querySelectorAll('.lang-btn');
+// Elementos DOM
+const chaptersContainer = document.getElementById('chaptersContainer');
+const loadingElement = document.getElementById('loading');
+const errorElement = document.getElementById('error');
+const langButtons = document.querySelectorAll('.lang-btn');
 
-        // Função para carregar o JSON
-        async function loadLessons() {
-            try {
-                loadingElement.classList.remove('hidden');
-                errorElement.classList.add('hidden');
-                chaptersContainer.classList.add('hidden');
+// Função para salvar a lição selecionada
+function saveSelectedLesson(lessonObject) {
+    // Salvar no localStorage
+    localStorage.setItem('selectedLesson', JSON.stringify(lessonObject));
+    
+    // Também salvar em sessionStorage como backup
+    sessionStorage.setItem('selectedLesson', JSON.stringify(lessonObject));
+    
+    // Salvar em cookie (para compatibilidade extra)
+    document.cookie = `selectedLesson=${encodeURIComponent(JSON.stringify(lessonObject))}; path=/; max-age=3600`; // 1 hora
+    
+    console.log('Lição salva:', lessonObject);
+}
 
-                const response = await fetch('licoes.json');
-                
-                if (!response.ok) {
-                    throw new Error('Erro ao carregar o arquivo JSON');
-                }
-                
-                allLessons = await response.json();
-                groupLessonsByChapter();
-                renderChapters();
-                
-                loadingElement.classList.add('hidden');
-                chaptersContainer.classList.remove('hidden');
-                
-            } catch (error) {
-                console.error('Erro:', error);
-                loadingElement.classList.add('hidden');
-                errorElement.classList.remove('hidden');
-            }
+// Função para redirecionar para a página de leitura
+function redirectToReadPage() {
+    // Verificar se há uma lição salva
+    const savedLesson = localStorage.getItem('selectedLesson');
+    if (!savedLesson) {
+        alert('Nenhuma lição selecionada!');
+        return;
+    }
+    
+    // Redirecionar para a página read
+    window.location.href = 'read/';
+}
+
+// Função para carregar o JSON
+async function loadLessons() {
+    try {
+        loadingElement.classList.remove('hidden');
+        errorElement.classList.add('hidden');
+        chaptersContainer.classList.add('hidden');
+
+        const response = await fetch('licoes.json');
+        
+        if (!response.ok) {
+            throw new Error('Erro ao carregar o arquivo JSON');
         }
+        
+        allLessons = await response.json();
+        groupLessonsByChapter();
+        renderChapters();
+        
+        loadingElement.classList.add('hidden');
+        chaptersContainer.classList.remove('hidden');
+        
+    } catch (error) {
+        console.error('Erro:', error);
+        loadingElement.classList.add('hidden');
+        errorElement.classList.remove('hidden');
+    }
+}
 
-        // Agrupar lições por capítulo
-        function groupLessonsByChapter() {
-            groupedChapters = {};
-            
-            allLessons.forEach(lesson => {
-                const chapterNum = lesson.capitulo;
-                
-                if (!groupedChapters[chapterNum]) {
-                    groupedChapters[chapterNum] = {
-                        capitulo: chapterNum,
-                        titulo: lesson.titulo,
-                        licoes: []
-                    };
-                }
-                
-                groupedChapters[chapterNum].licoes.push({
-                    licao: lesson.licao,
-                    titulo: lesson.titulo
-                });
-            });
+// Agrupar lições por capítulo
+function groupLessonsByChapter() {
+    groupedChapters = {};
+    
+    allLessons.forEach(lesson => {
+        const chapterNum = lesson.capitulo;
+        
+        if (!groupedChapters[chapterNum]) {
+            groupedChapters[chapterNum] = {
+                capitulo: chapterNum,
+                titulo: lesson.titulo,
+                licoes: []
+            };
         }
+        
+        // Adicionar o objeto completo da lição para ter todos os dados
+        groupedChapters[chapterNum].licoes.push(lesson);
+    });
+}
 
-        // Renderizar capítulos
-        function renderChapters() {
-            chaptersContainer.innerHTML = '';
-            
-            const chapters = Object.values(groupedChapters).sort((a, b) => a.capitulo - b.capitulo);
-            
-            chapters.forEach(chapter => {
-                const chapterCard = document.createElement('div');
-                chapterCard.className = 'chapter-card fade-in';
-                chapterCard.innerHTML = `
-                    <div class="chapter-header">
-                        <div class="chapter-title">${chapter.titulo[currentLanguage]}</div>
-                        <div class="chapter-number">Capítulo ${chapter.capitulo}</div>
-                    </div>
-                    <div class="lessons-container">
-                        <div class="lessons-grid">
-                            ${chapter.licoes.map(lesson => `
-                                <div class="lesson-card">
-                                    <div class="lesson-number">${lesson.licao[currentLanguage]}</div>
-                                    <div class="lesson-title">${lesson.titulo[currentLanguage]}</div>
-                                </div>
-                            `).join('')}
+// Renderizar capítulos
+function renderChapters() {
+    chaptersContainer.innerHTML = '';
+    
+    const chapters = Object.values(groupedChapters).sort((a, b) => a.capitulo - b.capitulo);
+    
+    chapters.forEach(chapter => {
+        const chapterCard = document.createElement('div');
+        chapterCard.className = 'chapter-card fade-in';
+        chapterCard.innerHTML = `
+            <div class="chapter-header">
+                <div class="chapter-title">${chapter.titulo[currentLanguage]}</div>
+                <div class="chapter-number">Capítulo ${chapter.capitulo}</div>
+            </div>
+            <div class="lessons-container">
+                <div class="lessons-grid">
+                    ${chapter.licoes.map(lesson => `
+                        <div class="lesson-card" data-lesson='${JSON.stringify(lesson).replace(/'/g, "&#39;")}'>
+                            <div class="lesson-number">${lesson.licao[currentLanguage]}</div>
+                            <div class="lesson-title">${lesson.titulo[currentLanguage]}</div>
+                            <div class="lesson-preview" style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                                Clique para ler esta lição
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
+        // Adicionar event listeners para cada card de lição
+        chapterCard.querySelectorAll('.lesson-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const lessonData = JSON.parse(this.dataset.lesson);
                 
-                chaptersContainer.appendChild(chapterCard);
+                // Salvar a lição selecionada
+                saveSelectedLesson(lessonData);
+                
+                // Feedback visual
+                this.style.background = '#ff9800';
+                this.style.color = 'white';
+                this.style.transform = 'scale(0.98)';
+                
+                setTimeout(() => {
+                    this.style.background = '';
+                    this.style.color = '';
+                    this.style.transform = '';
+                    
+                    // Redirecionar após o feedback visual
+                    redirectToReadPage();
+                }, 300);
             });
-        }
-
-        // Atualizar idioma
-        function updateLanguage(langIndex) {
-            currentLanguage = langIndex;
-            renderChapters();
             
-            // Atualizar botões de idioma
-            langButtons.forEach((btn, index) => {
-                if (index === langIndex) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+            // Efeito hover melhorado
+            card.addEventListener('mouseenter', function() {
+                this.style.cursor = 'pointer';
+                this.style.boxShadow = '0 8px 25px rgba(230, 126, 34, 0.4)';
             });
-        }
-
-        // Event Listeners
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const langIndex = parseInt(btn.dataset.lang);
-                updateLanguage(langIndex);
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
             });
         });
+        
+        chaptersContainer.appendChild(chapterCard);
+    });
+}
 
-        // Inicializar
-        loadLessons();
+// Atualizar idioma
+function updateLanguage(langIndex) {
+    currentLanguage = langIndex;
+    renderChapters();
+    
+    // Atualizar botões de idioma
+    langButtons.forEach((btn, index) => {
+        if (index === langIndex) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// Event Listeners
+langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const langIndex = parseInt(btn.dataset.lang);
+        updateLanguage(langIndex);
+    });
+});
+
+// Função para verificar se há lição salva (útil para debug)
+function checkSavedLesson() {
+    const saved = localStorage.getItem('selectedLesson');
+    if (saved) {
+        console.log('Lição atualmente salva:', JSON.parse(saved));
+    } else {
+        console.log('Nenhuma lição salva no momento');
+    }
+}
+
+// Inicializar
+loadLessons();
+
+// Expor funções globalmente para debug (opcional)
+window.checkSavedLesson = checkSavedLesson;
+window.clearSavedLesson = function() {
+    localStorage.removeItem('selectedLesson');
+    sessionStorage.removeItem('selectedLesson');
+    document.cookie = 'selectedLesson=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    console.log('Lição salva foi limpa');
+};
     </script>
 </body>
 </html>
