@@ -272,7 +272,7 @@
                 errorElement.classList.add('hidden');
                 chaptersGrid.classList.add('hidden');
 
-                const response = await fetch('dados.json');
+                const response = await fetch('licoes.json');
 
                 if (!response.ok) {
                     throw new Error('Erro ao carregar o arquivo JSON');
