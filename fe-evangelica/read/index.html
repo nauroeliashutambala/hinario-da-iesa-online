@@ -5,58 +5,105 @@
 		<title>Nauro Elias</title>
 	</head>
 	<style>
-	*{
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: arial;
-	}
-	button{
-		background-color: rgba(0,0,0,0.1);
+/* 🔹 Reset e estilo base */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Arial", sans-serif;
+}
+
+body {
+	background-color: #f9f9f9;
+	color: #333;
+	line-height: 1.6;
+}
+
+/* 🔹 Navegação (barra superior de abas) */
+nav {
+	background-color: #ff6000;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+/* 🔹 Botões da navegação */
+nav button {
+	flex: 1;
+	min-width: 120px;
+	background-color: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	border: none;
+	padding: 12px 20px;
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-weight: 600;
+	border-bottom: 3px solid transparent;
+	transition: all 0.3s ease;
+}
+
+/* Hover com transição */
+nav button:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Aba ativa */
+nav button.active {
+	background-color: rgba(0, 0, 0, 0.3);
+	border-bottom: 3px solid #fff;
+}
+
+/* 🔹 Seções (conteúdo das abas) */
+section {
+	padding: 25px;
+	background: #fff;
+	margin: 20px auto;
+	border-radius: 12px;
+	max-width: 900px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔹 Títulos e textos */
+h2 {
+	margin-bottom: 12px;
+	color: #ff6000;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+h3 {
+	margin-top: 15px;
+	font-size: 1.2rem;
+	color: #333;
+}
+
+ul {
+	padding-left: 25px;
+	margin-top: 8px;
+}
+
+.citacao {
+	margin-left: 12px;
+	text-decoration: underline;
+	color: #555;
+	font-style: italic;
+}
+
+/* 🔹 Responsividade */
+@media (max-width: 600px) {
+	nav button {
+		font-size: 0.95rem;
 		padding: 10px;
-		cursor: pointer;
-		width: 50%;
-		border: none;
-		border-bottom: 3px solid transparent;
-		font-size: 20px;
-		color: white;
 	}
-		button:hover{
-			background-color: rgba(50,33,60,0.1);
-			padding: 10px;
-			cursor: pointer;
-			width: 50%;
-			border: none;
-			border-bottom: 3px solid transparent;
-			font-size: 20px;
-			color: white;
-		}
-		nav{
-			background-color: #ff6000;
-			text-align: center;
-			color: #ffffff;
-		}
-		button.active{
-			background-color: rgba(0,0,0,0.3);
-			border-bottom: 3px solid black;
-		}
-		section{
-			padding: 20px;
-		}
-		h3{
-			margin-top: 12px;
-		}
-		h2{
-			margin-bottom :12px;
-		}
-		ul{
-			padding-left: 20px;
-		}
-		.citacao{
-			margin-left :12px;
-			text-decoration: underline;
-		}
-	</style>
+	section {
+		padding: 18px;
+		margin: 10px;
+	}
+}
+</style>
+
 	<body>
 		<nav>
 			<h1 class="capitulo">Capitulo 1</h1>
@@ -88,18 +135,18 @@
 		// Função para carregar dados salvos
 function loadSavedLesson() {
     // Tentar carregar de várias fontes
-    let savedData = localStorage.getItem('selectedLesson') || 
-                   sessionStorage.getItem('selectedLesson') || 
+    let savedData = localStorage.getItem('selectedLesson') ||
+                   sessionStorage.getItem('selectedLesson') ||
                    getCookie('selectedLesson');
 
     if (savedData) {
         try {
             const lesson = JSON.parse(savedData);
             processLessonData(lesson);
-            
+
             // Limpar dados após processamento
             clearSavedData();
-            
+
         } catch (error) {
             console.error('Erro ao processar dados salvos:', error);
             loadDefaultLesson();
@@ -128,10 +175,10 @@ function clearSavedData() {
 // Função para processar os dados da lição
 function processLessonData(lessonData) {
     console.log('Processando lição:', lessonData);
-    
+
     // Definir idioma padrão (0 = Português, 1 = Umbundo)
     let currentLang = 0;
-    
+
     // Funções simplificadas
     function setTextTo(classe, texto) {
         const element = document.querySelector(classe);
@@ -199,7 +246,7 @@ function processLessonData(lessonData) {
     function listaUM() {
         limpaCitacoes();
         limpaLista();
-        
+
         setNewTitle(lessonData.titulo[1]);
         setPergunta("Epulilo", lessonData.pergunta[1]);
         setResposta("Ekumululo", lessonData.resposta[1]);
@@ -208,13 +255,13 @@ function processLessonData(lessonData) {
         setLicao(lessonData.licao[1]);
         setOracao(lessonData.oracao[1]);
         setCapitulo("Ocilae " + lessonData.capitulo);
-        
+
         if (lessonData.explicacaoUm) {
             lessonData.explicacaoUm.forEach((texto) => {
                 setNewElement(texto);
             });
         }
-        
+
         if (lessonData.extras) {
             lessonData.extras.forEach((texto) => {
                 setCitacao(texto);
@@ -225,7 +272,7 @@ function processLessonData(lessonData) {
     function listaPT() {
         limpaCitacoes();
         limpaLista();
-        
+
         setNewTitle(lessonData.titulo[0]);
         setPergunta("Pergunta", lessonData.pergunta[0]);
         setResposta("Resposta", lessonData.resposta[0]);
@@ -234,13 +281,13 @@ function processLessonData(lessonData) {
         setLicao(lessonData.licao[0]);
         setOracao(lessonData.oracao[0]);
         setCapitulo("Capítulo " + lessonData.capitulo);
-        
+
         if (lessonData.explicacaoPt) {
             lessonData.explicacaoPt.forEach((texto) => {
                 setNewElement(texto);
             });
         }
-        
+
         if (lessonData.extras) {
             lessonData.extras.forEach((texto) => {
                 setCitacao(texto);
@@ -251,14 +298,14 @@ function processLessonData(lessonData) {
     // Configurar botões de idioma
     function setupLanguageButtons() {
         let btns = document.querySelectorAll("button");
-        
+
         btns.forEach((btn) => {
             btn.addEventListener("click", () => {
                 for (let i = 0; i < btns.length; i++) {
                     btns[i].classList.remove("active");
                 }
                 btn.classList.toggle("active");
-                
+
                 // Determinar qual idioma foi selecionado
                 if (btn.textContent.includes("Umbundo") || btn.textContent.includes("UM")) {
                     currentLang = 1;
@@ -279,7 +326,7 @@ function processLessonData(lessonData) {
 // Função para carregar lição padrão (fallback)
 function loadDefaultLesson() {
     console.log('Carregando lição padrão...');
-    
+
     const defaultLesson = {
         "capitulo": 1,
         "licao": [
@@ -329,7 +376,7 @@ function loadDefaultLesson() {
             "Yakobu = Tiago"
         ]
     };
-    
+
     processLessonData(defaultLesson);
 }
 
@@ -340,8 +387,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Adicionar função para debug (opcional)
 window.checkSavedData = function() {
-    const saved = localStorage.getItem('selectedLesson') || 
-                 sessionStorage.getItem('selectedLesson') || 
+    const saved = localStorage.getItem('selectedLesson') ||
+                 sessionStorage.getItem('selectedLesson') ||
                  getCookie('selectedLesson');
     console.log('Dados atualmente salvos:', saved);
     return saved;

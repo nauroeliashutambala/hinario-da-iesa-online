@@ -228,22 +228,56 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+nav {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
 
+}
+
+/* 🔹 Botões da navegação */
+nav button {
+	flex: 1;
+	width: 48%;
+	background-color: #c48717;
+	color: #fff;
+	border: none;
+	padding: 12px 20px;
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-weight: 600;
+	border-bottom: 3px solid transparent;
+	transition: all 0.3s ease;
+}
+
+/* Hover com transição */
+nav button:hover {
+	background-color: orange;
+}
+
+/* Aba ativa */
+nav button.active {
+	background-color: orange;;
+	border-bottom: 3px solid #fff;
+}
 
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Livro de Lições Bíblicas</h1>
-            <p>Estudo Bíblico em Português e Umbundo</p>
+            <h1>Fê Evangelica</h1>
+            <p>Igreja Evangelica Sinodal de Angola IESA</p>
         </div>
-<div class="language-selector">
-    <div class="language-buttons">
-        <button class="lang-btn active" data-lang="0">Português </button>
-        <button class="lang-btn" data-lang="1">Umbundo </button>
-    </div>
-</div>
+<nav >
+        <button class="lang-btn active" data-lang="0">Português</button>
+        <button class="lang-btn" data-lang="1">Umbundo</button>
+
+</nav>
+
 
 
         <div class="content-section fade-in" id="contentSection">
