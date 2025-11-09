@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro de Lições Bíblicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .language-selector {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .language-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .lang-btn {
+            padding: 12px 25px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .lang-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .chapters-section {
+            padding: 25px;
+        }
+
+        .chapters-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .chapters-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .chapter-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chapter-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .chapter-number {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .lessons-list {
+            display: none;
+            margin-top: 15px;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .chapter-card.active .lessons-list {
+            display: block;
+        }
+
+        .lesson-item {
+            background: white;
+            margin: 8px 0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            transition: all 0.2s ease;
+        }
+
+        .lesson-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .lesson-number {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .lesson-title {
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+
+        .back-btn {
+            display: none;
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+            background: #fdf2f2;
+            margin: 20px;
+            border-radius: 10px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 Livro de Lições Bíblicas</h1>
+            <p>Estudo Bíblico em Português e Umbundo</p>
+        </div>
+
+        <div class="language-selector">
+            <h2>🌍 Escolha o Idioma</h2>
+            <div class="language-buttons">
+                <button class="lang-btn active" data-lang="0">Português</button>
+                <button class="lang-btn" data-lang="1">Umbundo</button>
+            </div>
+        </div>
+
+        <div class="chapters-section fade-in" id="chaptersSection">
+            <h2>📚 Capítulos Disponíveis</h2>
+            <div class="loading" id="loading">
+                Carregando lições...
+            </div>
+            <div class="error hidden" id="error">
+                Erro ao carregar as lições. Verifique se o arquivo JSON está disponível.
+            </div>
+            <div class="chapters-grid hidden" id="chaptersGrid">
+                <!-- Capítulos serão inseridos aqui pelo JavaScript -->
+            </div>
+        </div>
+
+        <button class="back-btn" id="backBtn">← Voltar para Capítulos</button>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let currentLanguage = 0; // 0 = Português, 1 = Umbundo
+        let allLessons = [];
+        let groupedChapters = {};
+
+        // Elementos DOM
+        const chaptersGrid = document.getElementById('chaptersGrid');
+        const loadingElement = document.getElementById('loading');
+        const errorElement = document.getElementById('error');
+        const backBtn = document.getElementById('backBtn');
+        const langButtons = document.querySelectorAll('.lang-btn');
+
+        // Função para carregar o JSON
+        async function loadLessons() {
+            try {
+                loadingElement.classList.remove('hidden');
+                errorElement.classList.add('hidden');
+                chaptersGrid.classList.add('hidden');
+
+                const response = await fetch('licoes.json');
+
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar o arquivo JSON');
+                }
+
+                allLessons = await response.json();
+                groupLessonsByChapter();
+                renderChapters();
+
+                loadingElement.classList.add('hidden');
+                chaptersGrid.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Erro:', error);
+                loadingElement.classList.add('hidden');
+                errorElement.classList.remove('hidden');
+            }
+        }
+
+        // Agrupar lições por capítulo
+        function groupLessonsByChapter() {
+            groupedChapters = {};
+
+            allLessons.forEach(lesson => {
+                const chapterNum = lesson.capitulo;
+
+                if (!groupedChapters[chapterNum]) {
+                    groupedChapters[chapterNum] = {
+                        capitulo: chapterNum,
+                        titulo: lesson.titulo,
+                        licoes: []
+                    };
+                }
+
+                groupedChapters[chapterNum].licoes.push({
+                    licao: lesson.licao,
+                    titulo: lesson.titulo
+                });
+            });
+        }
+
+        // Renderizar capítulos
+        function renderChapters() {
+            chaptersGrid.innerHTML = '';
+
+            const chapters = Object.values(groupedChapters).sort((a, b) => a.capitulo - b.capitulo);
+
+            chapters.forEach(chapter => {
+                const chapterCard = document.createElement('div');
+                chapterCard.className = 'chapter-card';
+                chapterCard.innerHTML = `
+                    <div class="chapter-header">
+                        <div class="chapter-title">${chapter.titulo[currentLanguage]}</div>
+                        <div class="chapter-number">Capítulo ${chapter.capitulo}</div>
+                    </div>
+                    <div class="lessons-list">
+                        ${chapter.licoes.map(lesson => `
+                            <div class="lesson-item">
+                                <div class="lesson-number">${lesson.licao[currentLanguage]}</div>
+                                <div class="lesson-title">${lesson.titulo[currentLanguage]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                chapterCard.addEventListener('click', (e) => {
+                    // Fechar outros capítulos abertos
+                    document.querySelectorAll('.chapter-card.active').forEach(card => {
+                        if (card !== chapterCard) {
+                            card.classList.remove('active');
+                        }
+                    });
+
+                    // Alternar o capítulo clicado
+                    chapterCard.classList.toggle('active');
+
+                    // Mostrar botão voltar se algum capítulo estiver aberto
+                    const anyActive = document.querySelector('.chapter-card.active');
+                    backBtn.style.display = anyActive ? 'block' : 'none';
+                });
+
+                chaptersGrid.appendChild(chapterCard);
+            });
+        }
+
+        // Atualizar idioma
+        function updateLanguage(langIndex) {
+            currentLanguage = langIndex;
+            renderChapters();
+
+            // Atualizar botões de idioma
+            langButtons.forEach((btn, index) => {
+                if (index === langIndex) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Event Listeners
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const langIndex = parseInt(btn.dataset.lang);
+                updateLanguage(langIndex);
+            });
+        });
+
+        backBtn.addEventListener('click', () => {
+            document.querySelectorAll('.chapter-card.active').forEach(card => {
+                card.classList.remove('active');
+            });
+            backBtn.style.display = 'none';
+        });
+
+        // Inicializar
+        loadLessons();
+    </script>
+</body>
+</html>
