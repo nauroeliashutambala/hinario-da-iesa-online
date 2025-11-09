@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8" lang="pt-br">
+		<title>Nauro Elias</title>
+	</head>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: arial;
+	}
+	button{
+		background-color: rgba(0,0,0,0.1);
+		padding: 10px;
+		cursor: pointer;
+		width: 50%;
+		border: none;
+		border-bottom: 3px solid transparent;
+		font-size: 20px;
+		color: white;
+	}
+		button:hover{
+			background-color: rgba(50,33,60,0.1);
+			padding: 10px;
+			cursor: pointer;
+			width: 50%;
+			border: none;
+			border-bottom: 3px solid transparent;
+			font-size: 20px;
+			color: white;
+		}
+		nav{
+			background-color: #ff6000;
+			text-align: center;
+			color: #ffffff;
+		}
+		button.active{
+			background-color: rgba(0,0,0,0.3);
+			border-bottom: 3px solid black;
+		}
+		section{
+			padding: 20px;
+		}
+		h3{
+			margin-top: 12px;
+		}
+		h2{
+			margin-bottom :12px;
+		}
+		ul{
+			padding-left: 20px;
+		}
+		.citacao{
+			margin-left :12px;
+			text-decoration: underline;
+		}
+	</style>
+	<body>
+		<nav>
+			<h1 class="capitulo">Capitulo 1</h1>
+
+			<button class="btn_pt active" onclick="listaPT()">PT </button><button class="btn_um"  onclick="listaUM()">UM</button>
+		</nav>
+
+
+
+		<section>
+			<h2 class="licao">Licção 1</h2>
+			<p class="leitura"></p><br>
+			<p class="pergunta"></p><br>
+			<p class="resposta"></p><br>
+			<p> <b class="texto">Seu Texto</b></p>
+
+
+			<h3 class="Title_explicacao">Explicação:</h3>
+			<ul>
+			</ul>
+
+			<h3 class="Title_oracao">Oração:</h3>
+			<p class="oracao"></p>
+
+			<h3>Importante:</h3>
+			<p class="citacao"></p>
+		</section>
+
+		<script>
+				let a = JSON.parse(`
+	{
+		"capitulo": 1,
+		"licao": [
+			"Lição 1",
+			"Elongeso 1"
+		],
+		"titulo":[
+			"Deus e o Homem",
+			"Huku N’omunthu"
+		],
+		"leitura": [
+			"Salmos 135.5 - 21",
+			"Oviímbo 135.5 – 21"
+		],
+		"pergunta": [
+			"Quem é deus?",
+			"Huku olie?"
+		],
+		"resposta": [
+			"Deus é o criador dos ceus e da terra. Ele é o criador de todos os homens.",
+			"Huku omupakeko w´eulu n´ouye, haiye omupakeko w'ovanthu aveho."
+		],
+		"oracao": [
+			"Oremos para que Deus se revele melhor a nós.",
+			"Tuitei okuti Huku ulihitulula cavilapo ku'onthue."
+		],
+		"texto": [
+			"Tudo de bom que recebemos e tudu oque é perfeito vem do céu. Tudo isso  vem de Deus,  o criador das luzes do  céu.Ele não muda e não há nele sombra de mudança. (Tiago 1.17)",
+			"hdwe ffewfew ewf"
+		],
+		"explicacaoPt": [
+			"Há um só Dus (1Tim. 2.5)",
+			"Deus é espirito, não pode ser visto. (João 4.24; 1.18)",
+			"Deus é santo, é bom, nEle não há pecado.(Ap. 4.8)",
+			"Deus é amor, tem misericôrdia dos pecadores. (João 3.1)",
+			"Deus se revelou melhor enviando o seu único filho (João 3.16)"
+		],
+		"explicacaoUm": [
+			"Kuna Huku wike vala.  (1Tim. 2.5)",
+			"Huku oe oMphepo-iKola, kamonua n'omaiho. (Yoane  4.24; 1.18)",
+			"Huku omuwa, uKola, muAe mutupi onkhali (Ehitululo 4.8)",
+			"Huku omuwa, uKola, muAe mutupu onkhali. (Yoane 3.1)",
+			"Huku welihitulula cavilapo, p'okutuma oMana wAe wongunga. (Yoane 3.16)"
+		],
+
+		"extras": [
+			"Oviímbo = Salmo",
+			"Yakobu = Tiago"
+		]
+	}`)
+				console.log(a)
+
+
+
+				//simplificando funcoes:
+
+					function setTextTo(classe, texto){
+						document.querySelector(classe).innerHTML = texto
+					}
+
+
+				function setTextToElement(classe, texto){
+					document.querySelector(classe).innerHTML = texto
+				}
+
+
+				function setNewTitle(title){
+					document.querySelector("title").innerHTML = title
+				}
+				function setLicao(licao){
+					document.querySelector(".licao").innerHTML = licao
+				}
+				function setCapitulo(capitulo){
+					document.querySelector(".capitulo").innerHTML = capitulo
+				}
+				function setOracao(oracao){
+					document.querySelector(".oracao").innerHTML = oracao
+				}
+
+				function setLeitura(texto ,leitura){
+					document.querySelector(".leitura").innerHTML = `<b class="textos">${texto}: </b>${leitura}`
+				}
+				function setPergunta(texto ,pergunta){
+					document.querySelector(".pergunta").innerHTML = `<b class="textos">${texto}: </b>${pergunta}`
+				}
+
+				function setResposta(texto, resposta){
+					document.querySelector(".resposta").innerHTML = `<b class="textos">${texto}: </b>${resposta}`
+				}
+				function setTexto(texto){
+					document.querySelector(".texto").innerHTML = texto
+				}
+
+				function setCitacao(citacoes){
+					document.querySelector(".citacao").innerHTML +=citacoes + "<br>"
+				}
+
+				function limpaCitacoes(){
+					document.querySelector(".citacao").innerHTML =""
+				}
+				function setNewElement(lista){
+					document.querySelector("ul").innerHTML += `<li>${lista}</li>`
+				}
+
+				let btns = document.querySelectorAll("button");
+
+				btns.forEach((btn)=>{
+					btn.addEventListener("click", ()=>{
+						for(let i = 0; i < btns.length ; i++){
+							btns[i].classList.remove("active")
+						}
+						btn.classList.toggle("active")
+					})
+				})
+				function listaUM(){
+					limpaCitacoes()
+					setNewTitle(a.titulo[1])
+					setPergunta("Epulilo	", a.pergunta[1])
+					setResposta("Ekumululo", a.resposta[1])
+					setLeitura("Tanga" ,a.leitura[1])
+					setTexto(a.texto[1])
+					setLicao(a.licao[1])
+					setOracao(a.oracao[1])
+					setCapitulo("Ocilae "+ a.capitulo)
+					document.querySelector("ul").innerHTML = ``
+					a.explicacaoUm.forEach((texto)=>{
+						setNewElement(texto)
+					} )
+					a.extras.forEach((texto)=>{
+						setCitacao(texto)
+					} )
+				}
+				function listaPT(){
+					limpaCitacoes()
+					setNewTitle(a.titulo[0])
+					setPergunta("Pergunta", a.pergunta[0])
+					setResposta("Resposta", a.resposta[0])
+					setLeitura("Leitura" ,a.leitura[0])
+					setTexto(a.texto[0])
+					setLicao(a.licao[0])
+					setOracao(a.oracao[0])
+
+					setCapitulo("Capitulo "+ a.capitulo)
+					document.querySelector("ul").innerHTML = ``
+					a.explicacaoPt.forEach((texto)=>{
+						setNewElement(texto)
+					} )
+
+					a.extras.forEach((texto)=>{
+						setCitacao(texto)
+						console.log(texto)
+					} )
+				}
+
+				listaPT();
+
+
+				for(let i = 0; i<100; i++){
+					//document.querySelector(".numero").innerHTML += i + "<br>"
+				}
+
+
+		</script>
+	</body>
+<html>
