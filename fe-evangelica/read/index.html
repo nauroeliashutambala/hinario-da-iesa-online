@@ -84,170 +84,268 @@
 			<h3>Importante:</h3>
 			<p class="citacao"></p>
 		</section>
+<script>
+		// Função para carregar dados salvos
+function loadSavedLesson() {
+    // Tentar carregar de várias fontes
+    let savedData = localStorage.getItem('selectedLesson') || 
+                   sessionStorage.getItem('selectedLesson') || 
+                   getCookie('selectedLesson');
 
-		<script>
-				let a = JSON.parse(`
-	{
-		"capitulo": 1,
-		"licao": [
-			"Lição 1",
-			"Elongeso 1"
-		],
-		"titulo":[
-			"Deus e o Homem",
-			"Huku N’omunthu"
-		],
-		"leitura": [
-			"Salmos 135.5 - 21",
-			"Oviímbo 135.5 – 21"
-		],
-		"pergunta": [
-			"Quem é deus?",
-			"Huku olie?"
-		],
-		"resposta": [
-			"Deus é o criador dos ceus e da terra. Ele é o criador de todos os homens.",
-			"Huku omupakeko w´eulu n´ouye, haiye omupakeko w'ovanthu aveho."
-		],
-		"oracao": [
-			"Oremos para que Deus se revele melhor a nós.",
-			"Tuitei okuti Huku ulihitulula cavilapo ku'onthue."
-		],
-		"texto": [
-			"Tudo de bom que recebemos e tudu oque é perfeito vem do céu. Tudo isso  vem de Deus,  o criador das luzes do  céu.Ele não muda e não há nele sombra de mudança. (Tiago 1.17)",
-			"hdwe ffewfew ewf"
-		],
-		"explicacaoPt": [
-			"Há um só Dus (1Tim. 2.5)",
-			"Deus é espirito, não pode ser visto. (João 4.24; 1.18)",
-			"Deus é santo, é bom, nEle não há pecado.(Ap. 4.8)",
-			"Deus é amor, tem misericôrdia dos pecadores. (João 3.1)",
-			"Deus se revelou melhor enviando o seu único filho (João 3.16)"
-		],
-		"explicacaoUm": [
-			"Kuna Huku wike vala.  (1Tim. 2.5)",
-			"Huku oe oMphepo-iKola, kamonua n'omaiho. (Yoane  4.24; 1.18)",
-			"Huku omuwa, uKola, muAe mutupi onkhali (Ehitululo 4.8)",
-			"Huku omuwa, uKola, muAe mutupu onkhali. (Yoane 3.1)",
-			"Huku welihitulula cavilapo, p'okutuma oMana wAe wongunga. (Yoane 3.16)"
-		],
+    if (savedData) {
+        try {
+            const lesson = JSON.parse(savedData);
+            processLessonData(lesson);
+            
+            // Limpar dados após processamento
+            clearSavedData();
+            
+        } catch (error) {
+            console.error('Erro ao processar dados salvos:', error);
+            loadDefaultLesson();
+        }
+    } else {
+        loadDefaultLesson();
+    }
+}
 
-		"extras": [
-			"Oviímbo = Salmo",
-			"Yakobu = Tiago"
-		]
-	}`)
-				console.log(a)
+// Função para obter cookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+    return null;
+}
 
+// Função para limpar dados salvos
+function clearSavedData() {
+    localStorage.removeItem('selectedLesson');
+    sessionStorage.removeItem('selectedLesson');
+    document.cookie = 'selectedLesson=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    console.log('Dados salvos foram limpos');
+}
 
+// Função para processar os dados da lição
+function processLessonData(lessonData) {
+    console.log('Processando lição:', lessonData);
+    
+    // Definir idioma padrão (0 = Português, 1 = Umbundo)
+    let currentLang = 0;
+    
+    // Funções simplificadas
+    function setTextTo(classe, texto) {
+        const element = document.querySelector(classe);
+        if (element) element.innerHTML = texto;
+    }
 
-				//simplificando funcoes:
+    function setTextToElement(classe, texto) {
+        const element = document.querySelector(classe);
+        if (element) element.innerHTML = texto;
+    }
 
-					function setTextTo(classe, texto){
-						document.querySelector(classe).innerHTML = texto
-					}
+    function setNewTitle(title) {
+        document.querySelector("title").innerHTML = title;
+    }
 
+    function setLicao(licao) {
+        setTextTo(".licao", licao);
+    }
 
-				function setTextToElement(classe, texto){
-					document.querySelector(classe).innerHTML = texto
-				}
+    function setCapitulo(capitulo) {
+        setTextTo(".capitulo", capitulo);
+    }
 
+    function setOracao(oracao) {
+        setTextTo(".oracao", oracao);
+    }
 
-				function setNewTitle(title){
-					document.querySelector("title").innerHTML = title
-				}
-				function setLicao(licao){
-					document.querySelector(".licao").innerHTML = licao
-				}
-				function setCapitulo(capitulo){
-					document.querySelector(".capitulo").innerHTML = capitulo
-				}
-				function setOracao(oracao){
-					document.querySelector(".oracao").innerHTML = oracao
-				}
+    function setLeitura(texto, leitura) {
+        setTextTo(".leitura", `<b class="textos">${texto}: </b>${leitura}`);
+    }
 
-				function setLeitura(texto ,leitura){
-					document.querySelector(".leitura").innerHTML = `<b class="textos">${texto}: </b>${leitura}`
-				}
-				function setPergunta(texto ,pergunta){
-					document.querySelector(".pergunta").innerHTML = `<b class="textos">${texto}: </b>${pergunta}`
-				}
+    function setPergunta(texto, pergunta) {
+        setTextTo(".pergunta", `<b class="textos">${texto}: </b>${pergunta}`);
+    }
 
-				function setResposta(texto, resposta){
-					document.querySelector(".resposta").innerHTML = `<b class="textos">${texto}: </b>${resposta}`
-				}
-				function setTexto(texto){
-					document.querySelector(".texto").innerHTML = texto
-				}
+    function setResposta(texto, resposta) {
+        setTextTo(".resposta", `<b class="textos">${texto}: </b>${resposta}`);
+    }
 
-				function setCitacao(citacoes){
-					document.querySelector(".citacao").innerHTML +=citacoes + "<br>"
-				}
+    function setTexto(texto) {
+        setTextTo(".texto", texto);
+    }
 
-				function limpaCitacoes(){
-					document.querySelector(".citacao").innerHTML =""
-				}
-				function setNewElement(lista){
-					document.querySelector("ul").innerHTML += `<li>${lista}</li>`
-				}
+    function setCitacao(citacoes) {
+        const citacaoElement = document.querySelector(".citacao");
+        if (citacaoElement) citacaoElement.innerHTML += citacoes + "<br>";
+    }
 
-				let btns = document.querySelectorAll("button");
+    function limpaCitacoes() {
+        const citacaoElement = document.querySelector(".citacao");
+        if (citacaoElement) citacaoElement.innerHTML = "";
+    }
 
-				btns.forEach((btn)=>{
-					btn.addEventListener("click", ()=>{
-						for(let i = 0; i < btns.length ; i++){
-							btns[i].classList.remove("active")
-						}
-						btn.classList.toggle("active")
-					})
-				})
-				function listaUM(){
-					limpaCitacoes()
-					setNewTitle(a.titulo[1])
-					setPergunta("Epulilo	", a.pergunta[1])
-					setResposta("Ekumululo", a.resposta[1])
-					setLeitura("Tanga" ,a.leitura[1])
-					setTexto(a.texto[1])
-					setLicao(a.licao[1])
-					setOracao(a.oracao[1])
-					setCapitulo("Ocilae "+ a.capitulo)
-					document.querySelector("ul").innerHTML = ``
-					a.explicacaoUm.forEach((texto)=>{
-						setNewElement(texto)
-					} )
-					a.extras.forEach((texto)=>{
-						setCitacao(texto)
-					} )
-				}
-				function listaPT(){
-					limpaCitacoes()
-					setNewTitle(a.titulo[0])
-					setPergunta("Pergunta", a.pergunta[0])
-					setResposta("Resposta", a.resposta[0])
-					setLeitura("Leitura" ,a.leitura[0])
-					setTexto(a.texto[0])
-					setLicao(a.licao[0])
-					setOracao(a.oracao[0])
+    function setNewElement(lista) {
+        const ulElement = document.querySelector("ul");
+        if (ulElement) ulElement.innerHTML += `<li>${lista}</li>`;
+    }
 
-					setCapitulo("Capitulo "+ a.capitulo)
-					document.querySelector("ul").innerHTML = ``
-					a.explicacaoPt.forEach((texto)=>{
-						setNewElement(texto)
-					} )
+    function limpaLista() {
+        const ulElement = document.querySelector("ul");
+        if (ulElement) ulElement.innerHTML = "";
+    }
 
-					a.extras.forEach((texto)=>{
-						setCitacao(texto)
-						console.log(texto)
-					} )
-				}
+    // Funções de idioma
+    function listaUM() {
+        limpaCitacoes();
+        limpaLista();
+        
+        setNewTitle(lessonData.titulo[1]);
+        setPergunta("Epulilo", lessonData.pergunta[1]);
+        setResposta("Ekumululo", lessonData.resposta[1]);
+        setLeitura("Tanga", lessonData.leitura[1]);
+        setTexto(lessonData.texto[1]);
+        setLicao(lessonData.licao[1]);
+        setOracao(lessonData.oracao[1]);
+        setCapitulo("Ocilae " + lessonData.capitulo);
+        
+        if (lessonData.explicacaoUm) {
+            lessonData.explicacaoUm.forEach((texto) => {
+                setNewElement(texto);
+            });
+        }
+        
+        if (lessonData.extras) {
+            lessonData.extras.forEach((texto) => {
+                setCitacao(texto);
+            });
+        }
+    }
 
-				listaPT();
+    function listaPT() {
+        limpaCitacoes();
+        limpaLista();
+        
+        setNewTitle(lessonData.titulo[0]);
+        setPergunta("Pergunta", lessonData.pergunta[0]);
+        setResposta("Resposta", lessonData.resposta[0]);
+        setLeitura("Leitura", lessonData.leitura[0]);
+        setTexto(lessonData.texto[0]);
+        setLicao(lessonData.licao[0]);
+        setOracao(lessonData.oracao[0]);
+        setCapitulo("Capítulo " + lessonData.capitulo);
+        
+        if (lessonData.explicacaoPt) {
+            lessonData.explicacaoPt.forEach((texto) => {
+                setNewElement(texto);
+            });
+        }
+        
+        if (lessonData.extras) {
+            lessonData.extras.forEach((texto) => {
+                setCitacao(texto);
+            });
+        }
+    }
 
+    // Configurar botões de idioma
+    function setupLanguageButtons() {
+        let btns = document.querySelectorAll("button");
+        
+        btns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                for (let i = 0; i < btns.length; i++) {
+                    btns[i].classList.remove("active");
+                }
+                btn.classList.toggle("active");
+                
+                // Determinar qual idioma foi selecionado
+                if (btn.textContent.includes("Umbundo") || btn.textContent.includes("UM")) {
+                    currentLang = 1;
+                    listaUM();
+                } else {
+                    currentLang = 0;
+                    listaPT();
+                }
+            });
+        });
+    }
 
-				for(let i = 0; i<100; i++){
-					//document.querySelector(".numero").innerHTML += i + "<br>"
-				}
+    // Inicializar com Português
+    listaPT();
+    setupLanguageButtons();
+}
 
+// Função para carregar lição padrão (fallback)
+function loadDefaultLesson() {
+    console.log('Carregando lição padrão...');
+    
+    const defaultLesson = {
+        "capitulo": 1,
+        "licao": [
+            "Lição 1",
+            "Elongeso 1"
+        ],
+        "titulo": [
+            "Deus e o Homem",
+            "Huku N'omunthu"
+        ],
+        "leitura": [
+            "Salmos 135.5 - 21",
+            "Oviímbo 135.5 – 21"
+        ],
+        "pergunta": [
+            "Quem é deus?",
+            "Huku olie?"
+        ],
+        "resposta": [
+            "Deus é o criador dos ceus e da terra. Ele é o criador de todos os homens.",
+            "Huku omupakeko w´eulu n´ouye, haiye omupakeko w'ovanthu aveho."
+        ],
+        "oracao": [
+            "Oremos para que Deus se revele melhor a nós.",
+            "Tuitei okuti Huku ulihitulula cavilapo ku'onthue."
+        ],
+        "texto": [
+            "Tudo de bom que recebemos e tudu oque é perfeito vem do céu. Tudo isso vem de Deus, o criador das luzes do céu.Ele não muda e não há nele sombra de mudança. (Tiago 1.17)",
+            "hdwe ffewfew ewf"
+        ],
+        "explicacaoPt": [
+            "Há um só Dus (1Tim. 2.5)",
+            "Deus é espirito, não pode ser visto. (João 4.24; 1.18)",
+            "Deus é santo, é bom, nEle não há pecado.(Ap. 4.8)",
+            "Deus é amor, tem misericôrdia dos pecadores. (João 3.1)",
+            "Deus se revelou melhor enviando o seu único filho (João 3.16)"
+        ],
+        "explicacaoUm": [
+            "Kuna Huku wike vala. (1Tim. 2.5)",
+            "Huku oe oMphepo-iKola, kamonua n'omaiho. (Yoane 4.24; 1.18)",
+            "Huku omuwa, uKola, muAe mutupi onkhali (Ehitululo 4.8)",
+            "Huku omuwa, uKola, muAe mutupu onkhali. (Yoane 3.1)",
+            "Huku welihitulula cavilapo, p'okutuma oMana wAe wongunga. (Yoane 3.16)"
+        ],
+        "extras": [
+            "Oviímbo = Salmo",
+            "Yakobu = Tiago"
+        ]
+    };
+    
+    processLessonData(defaultLesson);
+}
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    loadSavedLesson();
+});
+
+// Adicionar função para debug (opcional)
+window.checkSavedData = function() {
+    const saved = localStorage.getItem('selectedLesson') || 
+                 sessionStorage.getItem('selectedLesson') || 
+                 getCookie('selectedLesson');
+    console.log('Dados atualmente salvos:', saved);
+    return saved;
+};
 
 		</script>
 	</body>
