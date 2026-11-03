@@ -7,7 +7,7 @@
   <title>Hinário da IESA Online — Hinos, letras e louvor</title>
   <meta name="description" content="Consulte o Hinário da IESA online. Pesquise hinos em português e idiomas angolanos, leia letras e encontre cânticos para louvor e adoração.">
   <link rel="canonical" href="https://hinario-da-iesa-online.vercel.app/">
-  <link rel="icon" href="/favicon.ico">
+  
   <link rel="stylesheet" href="/assets/css/app.css">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_AO">
@@ -19,6 +19,7 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebSite","name":"Hinário da IESA Online","url":"https://hinario-da-iesa-online.vercel.app/","inLanguage":"pt-AO"}
   </script>
+<link rel="icon" type="image/svg+xml" href="/assets/images/hinario-logo.svg">
 </head>
 <body>
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -55,7 +56,32 @@
         <span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Pesquisar por título, número ou letra..." autocomplete="off" aria-label="Pesquisar hinos">
         <kbd>⌘ K</kbd>
       </div>
-      <div class="filter-row"><div class="filters" id="languageFilters"><button class="filter active" data-lang="all">Todos</button></div><div class="result-label" id="resultLabel">A carregar biblioteca…</div></div>
+      <div class="filter-row">
+<section class="ies-general" aria-label="Categorias do hinário">
+  <div class="ies-general-heading">
+    <div>
+      <span class="ies-eyebrow">BIBLIOTECA MUSICAL</span>
+      <h2>Geral</h2>
+      <p>Explore os hinos por secção.</p>
+    </div>
+    <span class="ies-category-count" id="iesCategoryCount">11 secções</span>
+  </div>
+  <div class="ies-category-list" id="iesCategories">
+    <button class="ies-category active" data-category="all">Todos os hinos</button>
+    <button class="ies-category" data-category="Fé Evangélica">Fé Evangélica</button>
+    <button class="ies-category" data-category="Invocatórias">Invocatórias</button>
+    <button class="ies-category" data-category="Súplicas Gerais">Súplicas Gerais</button>
+    <button class="ies-category" data-category="Litanias">Litanias</button>
+    <button class="ies-category" data-category="Acção de Graças">Acção de Graças</button>
+    <button class="ies-category" data-category="Coragem">Coragem</button>
+    <button class="ies-category" data-category="Natal">Natal</button>
+    <button class="ies-category" data-category="Domingo de Ramos">Domingo de Ramos</button>
+    <button class="ies-category" data-category="Páscoa">Páscoa</button>
+    <button class="ies-category" data-category="Pentecostes">Pentecostes</button>
+    <button class="ies-category" data-category="Primeiro Dia do Ano">Primeiro Dia do Ano</button>
+  </div>
+</section>
+<div class="filters" id="languageFilters"><button class="filter active" data-lang="all">Todos</button></div><div class="result-label" id="resultLabel">A carregar biblioteca…</div></div>
       <div id="hymnGrid" class="hymn-grid" aria-live="polite"><div class="loading-card glass">A preparar os hinos…</div></div>
       <div class="empty-state glass" id="emptyState" hidden><span>⌕</span><h3>Nenhum hino encontrado</h3><p>Tenta outro título, número ou palavra da letra.</p><button class="button secondary" id="clearSearch">Limpar pesquisa</button></div>
       <div class="load-more-wrap"><button class="button secondary" id="loadMore" hidden>Mostrar mais hinos <span>↓</span></button></div>
@@ -76,5 +102,6 @@
     <div class="dialog-actions"><button class="button secondary" id="dialogFavorite">♡ Guardar favorito</button><button class="button primary" id="copyLyrics">Copiar letra</button></div>
   </dialog>
   <script src="/assets/js/app.js" defer></script>
+<script src="/assets/js/ies%20a-enhancements.js" defer></script>
 </body>
 </html>

@@ -5,3 +5,114 @@
 @media(max-width:520px){.topbar nav a:nth-child(2){display:none}.hero{padding:0 20px;margin-top:50px}.hero-copy>p{font-size:14px}.hero-actions{align-items:flex-start;flex-direction:column;gap:12px}.hero-art{height:270px}.stats-row{margin-bottom:55px}.library-section,.favorites-section{padding:0 16px;margin-bottom:65px}.section-heading h2{font-size:29px}.search-panel{height:56px;padding:0 13px}.search-panel kbd{display:none}.filter-row{align-items:flex-start;flex-direction:column}.hymn-grid{grid-template-columns:1fr;gap:10px}.hymn-card{min-height:130px}.about-panel{align-items:flex-start;gap:13px}.about-icon{width:38px;height:38px}.about-panel h2{font-size:18px}.round-link{display:none}footer{gap:12px;flex-direction:column}footer span:last-child{display:none}.dialog-actions{flex-wrap:wrap}.dialog-actions .button{flex:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 .hymn-page{max-width:850px;margin:70px auto 100px;padding:0 22px}.back-link{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:18px}.back-link:hover{color:var(--accent2)}.hymn-detail{border-radius:26px;padding:clamp(24px,5vw,48px)}.hymn-detail h1{font:800 clamp(30px,6vw,48px)/1.1 Manrope;letter-spacing:-1.8px;margin:15px 0 30px}.hymn-detail .lyrics{white-space:pre-wrap;line-height:2;font-size:15px;max-height:none;color:var(--text);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:25px}
+
+
+
+/* =================================================
+   HINÁRIO IESA — IDENTIDADE E CATEGORIAS
+   ================================================= */
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.ies-general {
+    margin: 28px 0;
+    padding: 24px;
+    background: linear-gradient(145deg,#111a28,#0b111b);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+}
+
+.ies-general-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.ies-general-heading h2 {
+    font-size: 25px;
+    font-weight: 800;
+    margin: 6px 0;
+    color: #f5f7fa;
+}
+
+.ies-general-heading p {
+    margin: 0;
+    color: #9aa8bb;
+    font-size: 13px;
+}
+
+.ies-eyebrow {
+    color: #f4d03f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.ies-category-count {
+    font-size: 11px;
+    color: #f4d03f;
+    background: rgba(244,208,63,.1);
+    padding: 8px 12px;
+    border-radius: 30px;
+}
+
+.ies-category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.ies-category {
+    border: 1px solid rgba(255,255,255,.11);
+    background: #151f2d;
+    color: #c6d0df;
+    border-radius: 10px;
+    padding: 11px 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+.ies-category:hover {
+    border-color: #f4d03f;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.ies-category.active {
+    background: #f4d03f;
+    color: #111722;
+    border-color: #f4d03f;
+}
+
+.ies-filter-message {
+    color: #aebbd0;
+    font-size: 12px;
+    margin-top: 14px;
+}
+
+@media(max-width:600px) {
+    .ies-general {
+        padding: 17px;
+        margin: 20px 0;
+    }
+
+    .ies-category-list {
+        display: grid;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .ies-category {
+        text-align: center;
+        padding: 12px 7px;
+        font-size: 11px;
+    }
+}
