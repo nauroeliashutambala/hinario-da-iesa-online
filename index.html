@@ -1,182 +1,80 @@
-
-
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Título e descrição -->
-  <title>Hinário da IESA Online</title>
-  <meta name="description" content="Hinário da IESA Online - Acesse hinos, letras e louvores da Igreja Evangélica Sinodal de Angola.">
-  <meta name="keywords" content="Hinário IESA, hinos evangélicos, louvores online, música gospel, Angola, Umbundo, Português">
-  <meta name="author" content="Nauro Elias Hutambala">
-
-  <!-- SEO Extra -->
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="pt-BR">
-  <meta name="theme-color" content="#FFA500">
-
-  <!-- Open Graph (Facebook/WhatsApp) -->
-  <meta property="og:title" content="Hinário da IESA Online">
-  <meta property="og:description" content="Hinos e louvores da Igreja Evangélica Sinodal de Angola disponíveis online.">
+<!doctype html>
+<html lang="pt-AO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <title>Hinário da IESA Online — Hinos, letras e louvor</title>
+  <meta name="description" content="Consulte o Hinário da IESA online. Pesquise hinos em português e idiomas angolanos, leia letras e encontre cânticos para louvor e adoração.">
+  <link rel="canonical" href="https://hinario-da-iesa-online.vercel.app/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://hinario-iesa-online.wuaze.com">
-  <meta property="og:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
-
-  <!-- Twitter Card -->
+  <meta property="og:locale" content="pt_AO">
+  <meta property="og:title" content="Hinário da IESA Online">
+  <meta property="og:description" content="Hinos, letras e louvor. Consulte o Hinário da IESA online.">
+  <meta property="og:url" content="https://hinario-da-iesa-online.vercel.app/">
+  <meta property="og:image" content="https://hinario-da-iesa-online.vercel.app/assets/img/capa-hinario.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hinário da IESA Online">
-  <meta name="twitter:description" content="Acesse hinos e louvores da IESA em português e umbundo.">
-  <meta name="twitter:image" content="https://hinario-iesa-online.wuaze.com/assets/img/capa-hinario.jpg">
-
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-    }
-    header {
-      background-color: #f8f8f8; /* Fundo do cabeçalho, similar à imagem */
-      padding: 10px 15px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .header-top i {
-      font-size: 24px;
-      color: #FFD700; /* Cor dourada para os ícones */
-    }
-    .header-top nav img {
-      width: 30px;
-      height: 30px;
-    }
-    .logo {
-      width: 80px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    }
-    h2 {
-      margin: 10px 0 0;
-      color: #333;
-    }
-    section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      padding: 20px;
-    }
-    .card {
-      background-color: white;
-      text-align: center;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-decoration: none;
-      color: #333;
-    }
-    .card img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-    }
-    .card p {
-      margin: 0;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
-
-
-  <header>
-    <div class="header-top">
-      <i class="fa-solid fa-bars"></i>
-      <i class="fa-solid fa-info-circle"></i>
-    </div>
-    <img src="assets/img/logo.png" class="logo" alt="Logotipo IESA - IGREJA EVANGELICA SINODAL DE ANGOLA">
-    <h2>Hinário da IESA</h2>
-      <p style="color: #f8f8f8;">Versão online do Hinário </p>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"Hinário da IESA Online","url":"https://hinario-da-iesa-online.vercel.app/","inLanguage":"pt-AO"}
+  </script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar glass">
+    <a class="brand" href="/" aria-label="Hinário da IESA - página inicial">
+      <span class="brand-mark">♫</span><span><strong>Hinário</strong><small>DA IESA · ONLINE</small></span>
+    </a>
+    <nav><a href="#biblioteca">Biblioteca</a><a href="#favoritos">Favoritos</a><a href="#sobre">Sobre</a></nav>
+    <button class="icon-button" id="themeToggle" aria-label="Alternar aparência" title="Alternar aparência">◐</button>
   </header>
-  <section>
-  </section>
 
-  
-  <footer>
-     NauroVibes @ 2025 
-    Todos os direitos reservados
-  </footer>
-  <script>
-  let itens_list = [
-    {titulo: "Hinos", img: "musical-note.png", link: "idiomas.html"}, 
-    {titulo: "Chamada para adoração", img: "open-book.png", link: "geral.html?file=chamada"},
-    {titulo: "Súplica geral", img: "folded.png", link: "geral.html?file=suplica"}, 
-    {titulo: "Litania", img: "calendar.png", link: "geral.html?file=litania"},
-    
-    // --- Novos itens ---
-    {titulo: "Pai Nosso", img: "open-book.png", link: "geral.html?file=painosso"},
-    {titulo: "Credo dos Apóstolos", img: "folded.png", link: "geral.html?file=credo"},
-    
-    // --- Itens seguintes ---
-   
-    {titulo: "Fê evangelica", img: "heart.png", link: "fe-evangelica"}
-  ];
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="pulse"></span> HINÁRIO DIGITAL · ANGOLA</span>
+        <h1>O louvor que<br><em>nos une.</em></h1>
+        <p>Encontre os hinos, acompanhe as letras e mantenha os cânticos sempre consigo.</p>
+        <div class="hero-actions"><a class="button primary" href="#biblioteca">Explorar hinário <span>↗</span></a><span class="hero-note">Uma biblioteca de fé, em qualquer lugar.</span></div>
+      </div>
+      <div class="hero-art glass">
+        <div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div>
+        <div class="art-book"><div class="book-glow"></div><span class="book-symbol">♫</span><small>HINÁRIO<br>DA IESA</small></div>
+        <div class="art-caption"><span class="tiny-dot"></span> PALAVRAS · MELODIA · FÉ</div>
+      </div>
+    </section>
 
+    <section class="stats-row" aria-label="Recursos">
+      <div><strong id="totalCount">—</strong><span>hinos disponíveis</span></div><div><strong>∞</strong><span>momentos de louvor</span></div><div><strong>♡</strong><span>os teus favoritos</span></div>
+    </section>
 
-  const sec = document.querySelector("section");
+    <section id="biblioteca" class="library-section">
+      <div class="section-heading"><div><span class="eyebrow">A TUA BIBLIOTECA</span><h2>Encontra um hino.</h2></div><span class="section-side">Pesquisar · Ler · Guardar</span></div>
+      <div class="search-panel glass">
+        <span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Pesquisar por título, número ou letra..." autocomplete="off" aria-label="Pesquisar hinos">
+        <kbd>⌘ K</kbd>
+      </div>
+      <div class="filter-row"><div class="filters" id="languageFilters"><button class="filter active" data-lang="all">Todos</button></div><div class="result-label" id="resultLabel">A carregar biblioteca…</div></div>
+      <div id="hymnGrid" class="hymn-grid" aria-live="polite"><div class="loading-card glass">A preparar os hinos…</div></div>
+      <div class="empty-state glass" id="emptyState" hidden><span>⌕</span><h3>Nenhum hino encontrado</h3><p>Tenta outro título, número ou palavra da letra.</p><button class="button secondary" id="clearSearch">Limpar pesquisa</button></div>
+      <div class="load-more-wrap"><button class="button secondary" id="loadMore" hidden>Mostrar mais hinos <span>↓</span></button></div>
+    </section>
 
-  itens_list.forEach(item => {
-    sec.innerHTML += `
-      <a href="${item.link}" class="card">
-        <img src="assets/img/${item.img}" alt="${item.titulo}">
-        <p>${item.titulo}</p>
-      </a>
-    `;
-  });
-</script>
+    <section id="favoritos" class="favorites-section">
+      <div class="section-heading"><div><span class="eyebrow">GUARDADOS POR TI</span><h2>Os teus favoritos.</h2></div><span class="section-side">Só neste dispositivo</span></div>
+      <div id="favoriteGrid" class="hymn-grid favorites-grid"><div class="muted-card">Marca o coração de um hino para o guardar aqui.</div></div>
+    </section>
 
-<!-- Botão Flutuante do Chat -->
-<style>
-#chat-float-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9999;
-  background: #ff5722;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-#chat-float-btn:hover {
-  background: #e64a19;
-}
-</style>
-<a href="chat.html" id="chat-float-btn" title="Abrir Chat">
-  <i class="fas fa-comments"></i>
-</a>
-<!-- Fim Botão Flutuante -->
+    <section id="sobre" class="about-panel glass"><div class="about-icon">✦</div><div><span class="eyebrow">HINÁRIO DA IESA</span><h2>Louvor que atravessa gerações.</h2><p>Uma experiência digital para consultar os hinos e acompanhar os cânticos da comunidade. Os dados originais do hinário são mantidos na pasta <code>db/</code>.</p></div><a href="#biblioteca" class="round-link" aria-label="Voltar à biblioteca">↑</a></section>
+  </main>
+  <footer><span>© <span id="year"></span> Hinário da IESA Online</span><span>Feito para acompanhar o teu louvor <b>✦</b></span></footer>
 
-
+  <dialog id="hymnDialog" class="hymn-dialog glass">
+    <div class="dialog-head"><div><span class="eyebrow" id="dialogNumber">HINO</span><h2 id="dialogTitle">Título do hino</h2></div><button class="icon-button" id="closeDialog" aria-label="Fechar">×</button></div>
+    <div id="dialogLyrics" class="lyrics"></div>
+    <div class="dialog-actions"><button class="button secondary" id="dialogFavorite">♡ Guardar favorito</button><button class="button primary" id="copyLyrics">Copiar letra</button></div>
+  </dialog>
+  <script src="/assets/js/app.js" defer></script>
+</body>
+</html>

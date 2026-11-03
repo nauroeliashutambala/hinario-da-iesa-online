@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hinario-da-iesa-online.vercel.app/sitemap.xml
