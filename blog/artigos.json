@@ -1,0 +1,185 @@
+[
+  {
+    "slug": "como-usar-o-hinario",
+    "titulo": "Como usar o Hinário da IESA Online",
+    "categoria": "Guia prático",
+    "resumo": "Um percurso completo pela pesquisa, escolha de idioma, leitura, favoritos e instalação offline da biblioteca.",
+    "data": "2026-11-03",
+    "tempo_leitura": 7,
+    "destaque": true,
+    "ensinamento": true,
+    "secoes": [
+      {
+        "titulo": "1. Começar pela biblioteca",
+        "paragrafos": [
+          "A página Hinos é o ponto de entrada para a coleção. Podes abrir o guia pelo menu ou pela página inicial e escolher uma das línguas disponíveis. A seleção conduz à biblioteca filtrada; a pesquisa pode ser feita pelo número, pelo título ou por palavras que apareçam na letra.",
+          "Se não souberes a grafia exata, experimenta uma parte curta do título. Os resultados aparecem em cartões com o número e o idioma, para poderes confirmar que encontraste a versão pretendida."
+        ]
+      },
+      {
+        "titulo": "2. Escolher e consultar um hino",
+        "paragrafos": [
+          "Abre o resultado para consultar a página individual. Ali podes ler a letra com mais espaço, copiar o texto quando a função estiver disponível e regressar à lista para continuar a pesquisa. Antes de usar um hino numa celebração, confirma a versão e a pronúncia com quem conhece a língua e a tradição local.",
+          "A coleção reúne idiomas diferentes e não deve ser entendida como uma tradução automática entre eles. Títulos, numeração e variantes podem refletir edições distintas."
+        ]
+      },
+      {
+        "titulo": "3. Guardar os teus favoritos",
+        "paragrafos": [
+          "Usa o controlo de favorito no hino para o guardar e consulta depois a página Favoritos. A lista é armazenada no navegador deste dispositivo: não exige uma conta, não sincroniza automaticamente com outros aparelhos e pode desaparecer se os dados do navegador forem apagados.",
+          "Para manter uma lista pessoal, evita limpar o armazenamento do navegador sem antes registar os hinos de que precisas. Os favoritos são atalhos; não alteram nem editam o conteúdo da biblioteca."
+        ]
+      },
+      {
+        "titulo": "4. Instalar e preparar o acesso offline",
+        "paragrafos": [
+          "A aplicação web progressiva (PWA) pode ser instalada a partir do navegador quando este apresenta a opção de instalação. No iPhone ou iPad, o procedimento habitual é abrir o menu Partilhar e escolher Adicionar ao ecrã principal.",
+          "Faz a primeira abertura e deixa a biblioteca terminar a preparação enquanto tens ligação à internet. Depois, testa o modo avião e abre as páginas que vais usar. O acesso offline depende dos recursos já guardados neste dispositivo; alterações publicadas no site só chegam após uma nova ligação e atualização."
+        ]
+      },
+      {
+        "titulo": "5. Secções gerais e estudos",
+        "paragrafos": [
+          "A área Secções gerais reúne materiais como o Pai Nosso, credos, chamadas, súplicas e litanias. Fé Evangélica organiza estudos bíblicos por lição e permite consultar os conteúdos disponíveis em português e umbundo.",
+          "Usa estes materiais como apoio à leitura, ao canto e à preparação comunitária. O site é uma ferramenta de consulta; não substitui a orientação pastoral, a edição impressa ou a confirmação de fontes quando uma decisão depender de uma versão oficial."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "igreja-povo-corpo-e-missao",
+    "titulo": "A igreja como povo, corpo e missão",
+    "categoria": "Ensaio teológico",
+    "resumo": "Uma leitura aprofundada da igreja como comunidade reunida, organismo de serviço, memória partilhada e presença responsável no mundo.",
+    "data": "2026-11-03",
+    "tempo_leitura": 12,
+    "destaque": true,
+    "ensinamento": true,
+    "nota_editorial": "Este é um ensaio teológico-pastoral de caráter geral. Não é uma declaração doutrinária oficial da IESA nem uma história institucional; para esse perfil, devem ser consultadas fontes e documentos publicados pela própria igreja.",
+    "secoes": [
+      {
+        "titulo": "1. Da reunião à comunidade",
+        "paragrafos": [
+          "Falar da igreja apenas como edifício reduz uma realidade que, no vocabulário cristão, é antes de tudo uma assembleia de pessoas convocadas pela fé. O lugar físico importa: dá forma à hospitalidade, à escuta, ao canto e à celebração. Mas paredes, bancos e púlpito não esgotam a igreja. A comunidade existe também quando os seus membros cuidam uns dos outros, transmitem a fé, discernem decisões e sustentam a esperança em circunstâncias comuns.",
+          "Esta distinção não desvaloriza a congregação local. Pelo contrário, impede que a instituição seja confundida com os seus símbolos materiais e lembra que cada estrutura deve servir pessoas concretas. A igreja torna-se reconhecível não só pelo que declara, mas pela coerência entre confissão, culto, relações internas e responsabilidade perante o próximo."
+        ]
+      },
+      {
+        "titulo": "2. Povo e corpo: duas imagens complementares",
+        "paragrafos": [
+          "A imagem bíblica do povo sublinha pertença, aliança e continuidade: ninguém inventa sozinho a história que recebe. A imagem do corpo, desenvolvida em 1 Coríntios 12 e Romanos 12, acrescenta interdependência e diversidade de funções. Um corpo não é uma coleção de peças idênticas; a diferença dos membros não constitui, por si, uma ameaça à unidade. Torna-se fonte de serviço quando é organizada pelo cuidado mútuo e limitada pela dignidade comum.",
+          "Estas imagens corrigem dois extremos. O individualismo transforma a fé numa experiência sem vínculos nem prestação de contas. A uniformidade, por sua vez, confunde unidade com repetição e pode silenciar línguas, experiências e dons legítimos. Uma comunidade madura procura uma unidade que suporte diferenças, reconheça limites e distribua responsabilidades sem converter liderança em privilégio."
+        ]
+      },
+      {
+        "titulo": "3. Memória, tradição e discernimento",
+        "paragrafos": [
+          "Uma igreja recebe Escrituras, orações, melodias, testemunhos e práticas de gerações anteriores. Essa memória não é um arquivo imóvel: é uma herança que precisa de ser compreendida, transmitida e examinada. Preservar não significa tratar cada forma histórica como intocável; renovar também não significa apagar as vozes que construíram a comunidade. O discernimento cristão pergunta o que uma prática comunica, a quem serve e se permanece fiel ao evangelho que afirma anunciar.",
+          "Por isso, a tradição é simultaneamente continuidade e responsabilidade. Requer atenção às fontes, aos contextos e às mudanças de linguagem. Requer também humildade para corrigir erros e explicar diferenças entre uma convicção teológica, um costume local e uma decisão administrativa. Sem essas distinções, opiniões particulares podem ser apresentadas indevidamente como doutrina oficial."
+        ]
+      },
+      {
+        "titulo": "4. Língua, canto e pertença",
+        "paragrafos": [
+          "O canto congregacional é uma forma de teologia vivida: a comunidade aprende palavras, imagens e ritmos enquanto canta. Quando o hinário acolhe português e línguas angolanas, torna visível que a participação na fé não deve depender de uma única língua. Cada língua transporta memória, relações e maneiras de nomear o mundo; por isso, cantar nela pode ser também um gesto de reconhecimento e pertença.",
+          "Essa riqueza exige rigor. Uma letra numa língua não é uma cópia neutra de outra; variantes, ortografia, métrica e escolhas de tradução podem alterar o sentido ou a possibilidade de cantar em conjunto. O trabalho editorial deve distinguir transcrição de tradução, identificar versões quando possível e convidar pessoas competentes nas línguas envolvidas a rever o texto. O repertório digital facilita acesso, mas não substitui esse cuidado comunitário."
+        ]
+      },
+      {
+        "titulo": "5. Culto e vida quotidiana",
+        "paragrafos": [
+          "O culto reúne leitura, oração, proclamação, canto e comunhão numa prática que orienta a vida para além do encontro. A liturgia dá forma ao tempo, ensina uma gramática de gratidão e lamento e oferece palavras para experiências que cada pessoa talvez não conseguisse expressar isoladamente. Quando a celebração é compreendida, a forma não é mero ornamento: organiza a atenção, a participação e a memória comum.",
+          "Existe, porém, um critério decisivo: a celebração não deve ser separada da justiça, da reconciliação e do cuidado concreto. Os profetas e os evangelhos impedem que o rito seja usado para encobrir violência, exclusão ou indiferença. A prática comunitária torna-se mais íntegra quando a oração conduz ao serviço, a escuta abre espaço para quem é vulnerável e a autoridade aceita ser examinada à luz da responsabilidade."
+        ]
+      },
+      {
+        "titulo": "6. Comunidade, autoridade e prestação de contas",
+        "paragrafos": [
+          "Toda comunidade precisa de formas de liderança, coordenação e decisão. A questão teológica não é apenas quem exerce autoridade, mas para que finalidade, dentro de que limites e com que mecanismos de responsabilidade. O modelo do serviço — associado, entre outros textos, a Marcos 10:42–45 — desafia a ideia de poder como domínio. Uma liderança orientada pelo serviço comunica, escuta, protege pessoas e reconhece que não é dona da comunidade nem da mensagem que anuncia.",
+          "A prestação de contas não é falta de fé; é uma expressão de cuidado com a verdade e com as pessoas. Procedimentos claros, informação acessível, canais para levantar preocupações e tratamento justo de conflitos ajudam a impedir que a linguagem espiritual seja usada para intimidar ou dispensar responsabilidade. Este princípio é geral: não constitui uma afirmação sobre práticas ou estruturas específicas da IESA."
+        ]
+      },
+      {
+        "titulo": "7. Missão, vizinhança e esperança",
+        "paragrafos": [
+          "A missão pode ser entendida como testemunho em palavra e ação: anunciar a esperança cristã, praticar hospitalidade, formar pessoas e participar responsavelmente da vida comum. Não se reduz a crescimento numérico nem a campanhas pontuais. Inclui presença paciente, serviço que respeita a dignidade de quem recebe e capacidade de dialogar sem abandonar convicções ou instrumentalizar necessidades alheias.",
+          "A esperança cristã também impede que a igreja se identifique sem reservas com qualquer poder político, cultura dominante ou projeto humano. A comunidade pode cooperar para o bem comum e, ao mesmo tempo, manter uma postura crítica diante da injustiça. A sua credibilidade depende de reconhecer a própria falibilidade, reparar danos quando os causa e não prometer aquilo que não pode garantir."
+        ]
+      },
+      {
+        "titulo": "8. Uma presença digital a serviço da comunidade",
+        "paragrafos": [
+          "Uma biblioteca online pode ampliar o acesso a hinos e estudos, ajudar na preparação de encontros e preservar materiais de consulta. Essa extensão digital, porém, não é a igreja em sentido pleno: não substitui relações presenciais, acompanhamento pastoral, participação sacramental ou os processos próprios de uma congregação. É uma ferramenta cuja qualidade se mede pela utilidade, acessibilidade, precisão e respeito pelas pessoas e pelos direitos dos autores.",
+          "No caso deste projeto, a informação comprovável é a que os próprios recursos apresentam: uma biblioteca de hinos em vários idiomas, secções gerais e estudos bíblicos bilingues. Um relato completo da IESA — incluindo denominação formal, história, organização, liderança, presença geográfica e doutrina oficial — deve ser construído com documentação institucional verificável. Distinguir o que sabemos do que ainda precisa de fonte é parte da honestidade que a comunicação cristã requer."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "dados-da-biblioteca",
+    "titulo": "Dados importantes da biblioteca",
+    "categoria": "Informação",
+    "resumo": "Conhece a dimensão do conteúdo publicado, a distribuição por idiomas e o que estes números significam — e não significam.",
+    "data": "2026-11-03",
+    "tempo_leitura": 5,
+    "destaque": false,
+    "ensinamento": true,
+    "mostrar_dados": true,
+    "secoes": [
+      {
+        "titulo": "Como ler estes números",
+        "paragrafos": [
+          "Os indicadores acima são calculados a partir dos ficheiros de dados que acompanham esta versão do site. A contagem de hinos considera identificadores únicos dentro de cada idioma; duplicados são excluídos. O total de lições corresponde aos registos da coleção Fé Evangélica.",
+          "Estas métricas descrevem o conteúdo disponibilizado pelo projeto, não o tamanho do repertório oficial da IESA, a circulação de edições impressas ou a aprovação institucional de cada registo. Uma contagem também não mede a qualidade da tradução, a integridade histórica ou a frequência de uso."
+        ]
+      },
+      {
+        "titulo": "Idiomas e responsabilidade editorial",
+        "paragrafos": [
+          "A presença de diferentes idiomas é um convite à consulta, mas também uma responsabilidade. Grafias e variantes podem mudar entre comunidades e edições. Antes de apresentar uma letra como versão definitiva, é importante documentar a origem, rever a língua com pessoas competentes e indicar incertezas em vez de as esconder.",
+          "Se encontrares um erro, uma duplicação ou uma atribuição incompleta, regista o número, o idioma e o trecho em questão para que a revisão possa ser localizada. Correções de conteúdo devem preservar a proveniência e respeitar os direitos dos titulares."
+        ]
+      },
+      {
+        "titulo": "Disponibilidade online e offline",
+        "paragrafos": [
+          "A aplicação guarda recursos no dispositivo para consulta sem ligação depois da instalação e da preparação inicial. O comportamento depende do navegador, do espaço disponível e da versão do conteúdo guardada. Favoritos são dados locais do navegador e não entram nestas contagens nem são enviados para uma conta.",
+          "Consulta o guia de utilização para preparar o acesso offline e testar as páginas antes de depender delas numa reunião ou viagem."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "hinos-linguas-e-memoria",
+    "titulo": "Hinos, línguas e memória comunitária",
+    "categoria": "Cultura e louvor",
+    "resumo": "Porque um hinário é mais do que uma lista de letras: é uma prática de memória, tradução, participação e cuidado.",
+    "data": "2026-11-03",
+    "tempo_leitura": 8,
+    "destaque": false,
+    "ensinamento": true,
+    "secoes": [
+      {
+        "titulo": "Cantar é aprender em conjunto",
+        "paragrafos": [
+          "Um hino cantado repetidamente ajuda uma comunidade a memorizar narrativas, orações e imagens de esperança. O texto deixa de ser apenas leitura individual: passa a ser respirado e interpretado por muitas vozes, com ritmos e experiências diferentes.",
+          "Essa dimensão coletiva pode acolher quem não domina todos os elementos de uma celebração, mas também exige atenção para que o repertório não exclua quem fala outra língua, tem outra experiência ou precisa de formas acessíveis de participação."
+        ]
+      },
+      {
+        "titulo": "Tradução é interpretação responsável",
+        "paragrafos": [
+          "Traduzir um hino envolve sentido, métrica, rima, pronúncia e possibilidade de canto. Uma solução literal pode soar artificial; uma solução cantável pode afastar-se do sentido original. A escolha requer colaboração entre conhecedores da língua, músicos e comunidade, além de registo claro da versão adotada.",
+          "Quando a fonte de uma letra ou a sua autoria não estiver confirmada, é melhor indicar essa limitação do que atribuir certeza indevida. A transmissão da memória não dispensa precisão documental."
+        ]
+      },
+      {
+        "titulo": "Um recurso digital, uma prática comunitária",
+        "paragrafos": [
+          "A pesquisa por idioma e a consulta offline tornam o repertório mais acessível em diferentes contextos. Ainda assim, o ecrã não decide a tonalidade, o andamento ou a forma de participação. Essas escolhas pertencem à comunidade que canta e à tradição que procura servir.",
+          "Usa o hinário como ponto de partida para aprender, comparar versões e preparar encontros. Sempre que possível, confirma as letras com edições autorizadas e com pessoas que conheçam a prática local."
+        ]
+      }
+    ]
+  }
+]

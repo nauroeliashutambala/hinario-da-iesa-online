@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-AO">
 	<head>
-		<meta charset="utf8" lang="pt-br">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Nauro Elias</title>
-	</head>
+		<link rel="stylesheet" href="/assets/css/app.css">
+		<link rel="stylesheet" href="/assets/css/responsive.css">
 	<style>
 /* 🔹 Reset e estilo base */
 * {
@@ -20,7 +22,7 @@ body {
 }
 
 /* 🔹 Navegação (barra superior de abas) */
-nav {
+.lesson-tabs {
 	background-color: #ff6000;
 	text-align: center;
 	display: flex;
@@ -30,7 +32,7 @@ nav {
 }
 
 /* 🔹 Botões da navegação */
-nav button {
+.lesson-tabs button {
 	flex: 1;
 	min-width: 120px;
 	background-color: rgba(255, 255, 255, 0.1);
@@ -45,12 +47,12 @@ nav button {
 }
 
 /* Hover com transição */
-nav button:hover {
+.lesson-tabs button:hover {
 	background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Aba ativa */
-nav button.active {
+.lesson-tabs button.active {
 	background-color: rgba(0, 0, 0, 0.3);
 	border-bottom: 3px solid #fff;
 }
@@ -93,7 +95,7 @@ ul {
 
 /* 🔹 Responsividade */
 @media (max-width: 600px) {
-	nav button {
+	.lesson-tabs button {
 		font-size: 0.95rem;
 		padding: 10px;
 	}
@@ -103,9 +105,31 @@ ul {
 	}
 }
 </style>
+	</head>
 
 	<body>
-		<nav>
+		<div class="ambient ambient-one"></div>
+		  <header class="topbar glass">
+    <a class="brand" href="/" aria-label="Hinário da IESA - página inicial">
+      <img class="brand-logo" src="/assets/img/logo.png" alt="Logótipo do Hinário da IESA" width="42" height="42">
+      <span><strong>Hinário</strong><small>DA IESA · ONLINE</small></span>
+    </a>
+    <nav id="mainNav" aria-label="Navegação principal">
+      <a href="/hino/">Hinos</a>
+      <a href="/geral/">Geral</a>
+      <a href="/blog/">Blog</a>
+      <a href="/favoritos/">Favoritos</a>
+      <a href="/fe-evangelica/">Fé Evangélica</a>
+      <a href="/sobre/">Sobre</a>
+    </nav>
+    <button class="menu-toggle" id="navToggle" type="button" aria-label="Abrir menu"
+      aria-controls="mainNav" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="icon-button" id="themeToggle" type="button"
+      aria-label="Alternar aparência" title="Alternar aparência">◐</button>
+  </header>
+		<nav class="lesson-tabs">
 			<h1 class="capitulo">Capitulo 1</h1>
 
 			<button class="btn_pt active" onclick="listaPT()">PT </button><button class="btn_um"  onclick="listaUM()">UM</button>
@@ -395,5 +419,7 @@ window.checkSavedData = function() {
 };
 
 		</script>
+		<script src="/assets/js/navigation.js" defer></script>
+		<script src="/assets/js/pwa.js" defer></script>
 	</body>
 <html>
