@@ -4,77 +4,1230 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#080b12">
+
   <title>Hinário da IESA Online — Hinos, letras e louvor</title>
-  <meta name="description" content="Consulte o Hinário da IESA online. Pesquise hinos em português e idiomas angolanos, leia letras e encontre cânticos para louvor e adoração.">
-  <link rel="canonical" href="https://hinario-da-iesa-online.vercel.app/">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/app.css">
+
+  <meta name="description"
+        content="Consulte o Hinário da IESA online. Pesquise hinos em português e idiomas angolanos, leia letras, encontre litanias, orações e cânticos para louvor e adoração.">
+
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Hinário da IESA">
+
+  <link rel="canonical"
+        href="https://hinario-da-iesa-online.vercel.app/">
+
+  <link rel="icon"
+        type="image/svg+xml"
+        href="/assets/images/hinario-logo.svg">
+
+  <link rel="stylesheet"
+        href="/assets/css/app.css">
+
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_AO">
-  <meta property="og:title" content="Hinário da IESA Online">
-  <meta property="og:description" content="Hinos, letras e louvor. Consulte o Hinário da IESA online.">
-  <meta property="og:url" content="https://hinario-da-iesa-online.vercel.app/">
-  <meta property="og:image" content="https://hinario-da-iesa-online.vercel.app/assets/img/capa-hinario.jpg">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="Hinário da IESA Online">
+
+  <meta property="og:title"
+        content="Hinário da IESA Online">
+
+  <meta property="og:description"
+        content="Hinos, letras, litanias e louvor. Consulte o Hinário da IESA online.">
+
+  <meta property="og:url"
+        content="https://hinario-da-iesa-online.vercel.app/">
+
+  <meta property="og:image"
+        content="https://hinario-da-iesa-online.vercel.app/assets/images/hinario-logo.svg">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hinário da IESA Online">
+
+  <meta name="twitter:description"
+        content="Consulte hinos, letras, litanias e cânticos do Hinário da IESA.">
+
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"Hinário da IESA Online","url":"https://hinario-da-iesa-online.vercel.app/","inLanguage":"pt-AO"}
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Hinário da IESA Online",
+    "url": "https://hinario-da-iesa-online.vercel.app/",
+    "inLanguage": "pt-AO",
+    "description": "Biblioteca digital de hinos, litanias e cânticos da IESA."
+  }
   </script>
+
+  <style>
+    /* =====================================================
+       ÁREA GERAL
+       ===================================================== */
+
+    .general-section {
+      margin: 45px 0;
+    }
+
+    .general-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .general-section-header h2 {
+      margin: 8px 0;
+      font-size: clamp(25px, 4vw, 38px);
+      letter-spacing: -1.5px;
+    }
+
+    .general-section-header p {
+      margin: 0;
+      color: var(--muted, #9ba7b8);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .general-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 30px;
+      background: rgba(244, 208, 63, .09);
+      border: 1px solid rgba(244, 208, 63, .2);
+      color: #f4d03f;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .general-categories {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .general-category {
+      min-height: 105px;
+      padding: 17px;
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(145deg, #121b28, #0b111a);
+      color: #dbe3ee;
+      text-align: left;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .general-category:hover {
+      border-color: rgba(244,208,63,.5);
+      transform: translateY(-3px);
+    }
+
+    .general-category.active {
+      background: linear-gradient(145deg, #f4d03f, #e9b923);
+      color: #111722;
+      border-color: #f4d03f;
+    }
+
+    .general-category .category-symbol {
+      display: block;
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .general-category strong {
+      display: block;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .general-category small {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      opacity: .75;
+    }
+
+    .general-content {
+      min-height: 150px;
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(145deg, #111a27, #0a1019);
+    }
+
+    .general-content h3 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 22px;
+    }
+
+    .general-content .general-text {
+      color: #d5deeb;
+      font-size: 14px;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .general-content .general-text h4 {
+      color: #f4d03f;
+      margin-top: 25px;
+      font-size: 13px;
+    }
+
+    .general-loading,
+    .general-error,
+    .general-empty {
+      padding: 20px;
+      color: #aab6c8;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .general-error {
+      color: #ff9999;
+    }
+
+    .general-actions {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .general-actions button {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      padding: 10px 15px;
+      background: #172131;
+      color: #e3eaf4;
+      cursor: pointer;
+    }
+
+    .general-actions button:hover {
+      border-color: #f4d03f;
+    }
+
+    @media(max-width:900px) {
+      .general-categories {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media(max-width:600px) {
+      .general-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .general-categories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+      }
+
+      .general-category {
+        min-height: 95px;
+        padding: 13px;
+      }
+
+      .general-content {
+        padding: 17px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <!-- =====================================================
+       CABEÇALHO
+       ===================================================== -->
+
   <header class="topbar glass">
-    <a class="brand" href="/" aria-label="Hinário da IESA - página inicial">
-      <span class="brand-mark">♫</span><span><strong>Hinário</strong><small>DA IESA · ONLINE</small></span>
+
+    <a class="brand"
+       href="/"
+       aria-label="Hinário da IESA - página inicial">
+
+      <img
+        class="brand-logo"
+        src="/assets/images/hinario-logo.svg"
+        alt="Logótipo do Hinário da IESA"
+        width="42"
+        height="42">
+
+      <span>
+        <strong>Hinário</strong>
+        <small>DA IESA · ONLINE</small>
+      </span>
+
     </a>
-    <nav><a href="#biblioteca">Biblioteca</a><a href="#favoritos">Favoritos</a><a href="#sobre">Sobre</a></nav>
-    <button class="icon-button" id="themeToggle" aria-label="Alternar aparência" title="Alternar aparência">◐</button>
+
+    <nav aria-label="Navegação principal">
+
+      <a href="#biblioteca">Biblioteca</a>
+
+      <a href="#geral">Geral</a>
+
+      <a href="#favoritos">Favoritos</a>
+
+      <a href="#sobre">Sobre</a>
+
+    </nav>
+
+    <button
+      class="icon-button"
+      id="themeToggle"
+      aria-label="Alternar aparência"
+      title="Alternar aparência">
+
+      ◐
+
+    </button>
+
   </header>
 
   <main>
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
     <section class="hero">
+
       <div class="hero-copy">
-        <span class="eyebrow"><span class="pulse"></span> HINÁRIO DIGITAL · ANGOLA</span>
-        <h1>O louvor que<br><em>nos une.</em></h1>
-        <p>Encontre os hinos, acompanhe as letras e mantenha os cânticos sempre consigo.</p>
-        <div class="hero-actions"><a class="button primary" href="#biblioteca">Explorar hinário <span>↗</span></a><span class="hero-note">Uma biblioteca de fé, em qualquer lugar.</span></div>
+
+        <span class="eyebrow">
+          <span class="pulse"></span>
+          HINÁRIO DIGITAL · ANGOLA
+        </span>
+
+        <h1>
+          O louvor que
+          <br>
+          <em>nos une.</em>
+        </h1>
+
+        <p>
+          Encontre os hinos, acompanhe as letras
+          e mantenha os cânticos sempre consigo.
+        </p>
+
+        <div class="hero-actions">
+
+          <a class="button primary" href="#biblioteca">
+
+            Explorar hinário
+
+            <span>↗</span>
+
+          </a>
+
+          <span class="hero-note">
+            Uma biblioteca de fé, em qualquer lugar.
+          </span>
+
+        </div>
+
       </div>
+
       <div class="hero-art glass">
-        <div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div>
-        <div class="art-book"><div class="book-glow"></div><span class="book-symbol">♫</span><small>HINÁRIO<br>DA IESA</small></div>
-        <div class="art-caption"><span class="tiny-dot"></span> PALAVRAS · MELODIA · FÉ</div>
+
+        <div class="art-orbit orbit-a"></div>
+        <div class="art-orbit orbit-b"></div>
+
+        <div class="art-book">
+
+          <div class="book-glow"></div>
+
+          <img
+            src="/assets/images/hinario-logo.svg"
+            alt=""
+            width="100"
+            height="100">
+
+          <small>
+            HINÁRIO
+            <br>
+            DA IESA
+          </small>
+
+        </div>
+
+        <div class="art-caption">
+
+          <span class="tiny-dot"></span>
+
+          PALAVRAS · MELODIA · FÉ
+
+        </div>
+
       </div>
+
     </section>
+
+    <!-- =====================================================
+         ESTATÍSTICAS
+         ===================================================== -->
 
     <section class="stats-row" aria-label="Recursos">
-      <div><strong id="totalCount">—</strong><span>hinos disponíveis</span></div><div><strong>∞</strong><span>momentos de louvor</span></div><div><strong>♡</strong><span>os teus favoritos</span></div>
+
+      <div>
+
+        <strong id="totalCount">—</strong>
+
+        <span>hinos disponíveis</span>
+
+      </div>
+
+      <div>
+
+        <strong>∞</strong>
+
+        <span>momentos de louvor</span>
+
+      </div>
+
+      <div>
+
+        <strong>♡</strong>
+
+        <span>os teus favoritos</span>
+
+      </div>
+
     </section>
+
+    <!-- =====================================================
+         GERAL
+         ===================================================== -->
+
+    <section id="geral" class="general-section">
+
+      <div class="general-section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            SECÇÕES ESPECIAIS
+          </span>
+
+          <h2>Geral.</h2>
+
+          <p>
+            Orações, credos, chamadas e litanias
+            para acompanhar os momentos de louvor.
+          </p>
+
+        </div>
+
+        <span class="general-badge">
+
+          ✦
+
+          5 secções
+
+        </span>
+
+      </div>
+
+      <div
+        class="general-categories"
+        id="generalCategories">
+
+        <button
+          class="general-category active"
+          data-general="painosso">
+
+          <span class="category-symbol">✦</span>
+
+          <strong>Pai Nosso</strong>
+
+          <small>Oração do Senhor</small>
+
+        </button>
+
+        <button
+          class="general-category"
+          data-general="chamada">
+
+          <span class="category-symbol">♫</span>
+
+          <strong>Chamada</strong>
+
+          <small>Adoração</small>
+
+        </button>
+
+        <button
+          class="general-category"
+          data-general="credo">
+
+          <span class="category-symbol">✧</span>
+
+          <strong>Credo</strong>
+
+          <small>Confissão de fé</small>
+
+        </button>
+
+        <button
+          class="general-category"
+          data-general="suplica">
+
+          <span class="category-symbol">♡</span>
+
+          <strong>Súplicas</strong>
+
+          <small>Orações gerais</small>
+
+        </button>
+
+        <button
+          class="general-category"
+          data-general="litania">
+
+          <span class="category-symbol">☼</span>
+
+          <strong>Litanias</strong>
+
+          <small>Cânticos litúrgicos</small>
+
+        </button>
+
+      </div>
+
+      <article
+        class="general-content glass"
+        id="generalContent"
+        aria-live="polite">
+
+        <div class="general-loading">
+
+          A carregar conteúdo…
+
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- =====================================================
+         BIBLIOTECA
+         ===================================================== -->
 
     <section id="biblioteca" class="library-section">
-      <div class="section-heading"><div><span class="eyebrow">A TUA BIBLIOTECA</span><h2>Encontra um hino.</h2></div><span class="section-side">Pesquisar · Ler · Guardar</span></div>
-      <div class="search-panel glass">
-        <span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Pesquisar por título, número ou letra..." autocomplete="off" aria-label="Pesquisar hinos">
-        <kbd>⌘ K</kbd>
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            A TUA BIBLIOTECA
+          </span>
+
+          <h2>Encontra um hino.</h2>
+
+        </div>
+
+        <span class="section-side">
+
+          Pesquisar · Ler · Guardar
+
+        </span>
+
       </div>
-      <div class="filter-row"><div class="filters" id="languageFilters"><button class="filter active" data-lang="all">Todos</button></div><div class="result-label" id="resultLabel">A carregar biblioteca…</div></div>
-      <div id="hymnGrid" class="hymn-grid" aria-live="polite"><div class="loading-card glass">A preparar os hinos…</div></div>
-      <div class="empty-state glass" id="emptyState" hidden><span>⌕</span><h3>Nenhum hino encontrado</h3><p>Tenta outro título, número ou palavra da letra.</p><button class="button secondary" id="clearSearch">Limpar pesquisa</button></div>
-      <div class="load-more-wrap"><button class="button secondary" id="loadMore" hidden>Mostrar mais hinos <span>↓</span></button></div>
+
+      <!-- PESQUISA -->
+
+      <div class="search-panel glass">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Pesquisar por título, número ou letra..."
+          autocomplete="off"
+          aria-label="Pesquisar hinos">
+
+        <kbd>⌘ K</kbd>
+
+      </div>
+
+      <!-- FILTROS DE IDIOMA -->
+
+      <div class="filter-row">
+
+        <div
+          class="filters"
+          id="languageFilters">
+
+          <button
+            class="filter active"
+            data-lang="all">
+
+            Todos
+
+          </button>
+
+        </div>
+
+        <div
+          class="result-label"
+          id="resultLabel">
+
+          A carregar biblioteca…
+
+        </div>
+
+      </div>
+
+      <!-- HINOS -->
+
+      <div
+        id="hymnGrid"
+        class="hymn-grid"
+        aria-live="polite">
+
+        <div class="loading-card glass">
+
+          A preparar os hinos…
+
+        </div>
+
+      </div>
+
+      <!-- SEM RESULTADOS -->
+
+      <div
+        class="empty-state glass"
+        id="emptyState"
+        hidden>
+
+        <span>⌕</span>
+
+        <h3>Nenhum hino encontrado</h3>
+
+        <p>
+          Tenta outro título, número ou palavra da letra.
+        </p>
+
+        <button
+          class="button secondary"
+          id="clearSearch">
+
+          Limpar pesquisa
+
+        </button>
+
+      </div>
+
+      <!-- PAGINAÇÃO -->
+
+      <div class="load-more-wrap">
+
+        <button
+          class="button secondary"
+          id="loadMore"
+          hidden>
+
+          Mostrar mais hinos
+
+          <span>↓</span>
+
+        </button>
+
+      </div>
+
     </section>
 
-    <section id="favoritos" class="favorites-section">
-      <div class="section-heading"><div><span class="eyebrow">GUARDADOS POR TI</span><h2>Os teus favoritos.</h2></div><span class="section-side">Só neste dispositivo</span></div>
-      <div id="favoriteGrid" class="hymn-grid favorites-grid"><div class="muted-card">Marca o coração de um hino para o guardar aqui.</div></div>
+    <!-- =====================================================
+         FAVORITOS
+         ===================================================== -->
+
+    <section
+      id="favoritos"
+      class="favorites-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            GUARDADOS POR TI
+          </span>
+
+          <h2>Os teus favoritos.</h2>
+
+        </div>
+
+        <span class="section-side">
+
+          Só neste dispositivo
+
+        </span>
+
+      </div>
+
+      <div
+        id="favoriteGrid"
+        class="hymn-grid favorites-grid">
+
+        <div class="muted-card">
+
+          Marca o coração de um hino
+          para o guardar aqui.
+
+        </div>
+
+      </div>
+
     </section>
 
-    <section id="sobre" class="about-panel glass"><div class="about-icon">✦</div><div><span class="eyebrow">HINÁRIO DA IESA</span><h2>Louvor que atravessa gerações.</h2><p>Uma experiência digital para consultar os hinos e acompanhar os cânticos da comunidade. Os dados originais do hinário são mantidos na pasta <code>db/</code>.</p></div><a href="#biblioteca" class="round-link" aria-label="Voltar à biblioteca">↑</a></section>
+    <!-- =====================================================
+         SOBRE
+         ===================================================== -->
+
+    <section
+      id="sobre"
+      class="about-panel glass">
+
+      <div class="about-icon">
+
+        ✦
+
+      </div>
+
+      <div>
+
+        <span class="eyebrow">
+
+          HINÁRIO DA IESA
+
+        </span>
+
+        <h2>
+
+          Louvor que atravessa gerações.
+
+        </h2>
+
+        <p>
+
+          Uma experiência digital para consultar os hinos,
+          acompanhar os cânticos e encontrar conteúdos
+          para os momentos de louvor.
+
+          Os dados originais do hinário são mantidos
+          na pasta <code>db/</code>.
+
+        </p>
+
+      </div>
+
+      <a
+        href="#biblioteca"
+        class="round-link"
+        aria-label="Voltar à biblioteca">
+
+        ↑
+
+      </a>
+
+    </section>
+
   </main>
-  <footer><span>© <span id="year"></span> Hinário da IESA Online</span><span>Feito para acompanhar o teu louvor <b>✦</b></span></footer>
 
-  <dialog id="hymnDialog" class="hymn-dialog glass">
-    <div class="dialog-head"><div><span class="eyebrow" id="dialogNumber">HINO</span><h2 id="dialogTitle">Título do hino</h2></div><button class="icon-button" id="closeDialog" aria-label="Fechar">×</button></div>
-    <div id="dialogLyrics" class="lyrics"></div>
-    <div class="dialog-actions"><button class="button secondary" id="dialogFavorite">♡ Guardar favorito</button><button class="button primary" id="copyLyrics">Copiar letra</button></div>
+  <!-- =====================================================
+       RODAPÉ
+       ===================================================== -->
+
+  <footer>
+
+    <span>
+
+      ©
+
+      <span id="year"></span>
+
+      Hinário da IESA Online
+
+    </span>
+
+    <span>
+
+      Feito para acompanhar o teu louvor
+
+      <b>✦</b>
+
+    </span>
+
+  </footer>
+
+  <!-- =====================================================
+       MODAL DE HINO
+       ===================================================== -->
+
+  <dialog
+    id="hymnDialog"
+    class="hymn-dialog glass">
+
+    <div class="dialog-head">
+
+      <div>
+
+        <span
+          class="eyebrow"
+          id="dialogNumber">
+
+          HINO
+
+        </span>
+
+        <h2 id="dialogTitle">
+
+          Título do hino
+
+        </h2>
+
+      </div>
+
+      <button
+        class="icon-button"
+        id="closeDialog"
+        aria-label="Fechar">
+
+        ×
+
+      </button>
+
+    </div>
+
+    <div
+      id="dialogLyrics"
+      class="lyrics">
+
+    </div>
+
+    <div class="dialog-actions">
+
+      <button
+        class="button secondary"
+        id="dialogFavorite">
+
+        ♡ Guardar favorito
+
+      </button>
+
+      <button
+        class="button primary"
+        id="copyLyrics">
+
+        Copiar letra
+
+      </button>
+
+    </div>
+
   </dialog>
+
+  <!-- =====================================================
+       APLICAÇÃO ORIGINAL
+       ===================================================== -->
+
   <script src="/assets/js/app.js" defer></script>
+
+  <!-- =====================================================
+       NAVEGAÇÃO GERAL
+       ===================================================== -->
+
+  <script>
+  (() => {
+
+    "use strict";
+
+    const categories =
+      document.getElementById("generalCategories");
+
+    const content =
+      document.getElementById("generalContent");
+
+    if (!categories || !content) {
+      return;
+    }
+
+    const sections = {
+
+      painosso: {
+        file: "/db/geral/painosso.json",
+        title: "Pai Nosso"
+      },
+
+      chamada: {
+        file: "/db/geral/chamada.json",
+        title: "Chamada"
+      },
+
+      credo: {
+        file: "/db/geral/credo.json",
+        title: "Credo"
+      },
+
+      suplica: {
+        file: "/db/geral/suplica.json",
+        title: "Súplicas Gerais"
+      },
+
+      litania: {
+        file: "/db/geral/litania.json",
+        title: "Litanias"
+      }
+
+    };
+
+    let currentSection = "painosso";
+
+    function escapeHTML(value) {
+
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+    function renderValue(value) {
+
+      if (value === null || value === undefined) {
+        return "";
+      }
+
+      if (typeof value === "string") {
+
+        return escapeHTML(value)
+          .replace(/\n/g, "<br>");
+
+      }
+
+      if (typeof value === "number") {
+
+        return escapeHTML(value);
+
+      }
+
+      if (Array.isArray(value)) {
+
+        return value
+          .map(renderValue)
+          .join("<br><br>");
+
+      }
+
+      if (typeof value === "object") {
+
+        const title =
+          value.titulo_pt ||
+          value.titulo ||
+          value.title ||
+          value.nome ||
+          "";
+
+        const text =
+          value.texto_pt ||
+          value.texto ||
+          value.letra ||
+          value.conteudo ||
+          value.content ||
+          "";
+
+        let output = "";
+
+        if (title) {
+
+          output +=
+            "<h4>" +
+            escapeHTML(title) +
+            "</h4>";
+
+        }
+
+        if (text) {
+
+          output +=
+            '<div class="general-text">' +
+            renderValue(text) +
+            "</div>";
+
+        }
+
+        if (!title && !text) {
+
+          output += Object.entries(value)
+            .map(([key, item]) => {
+
+              return (
+                "<h4>" +
+                escapeHTML(key) +
+                "</h4>" +
+                renderValue(item)
+              );
+
+            })
+            .join("<br><br>");
+
+        }
+
+        return output;
+
+      }
+
+      return "";
+
+    }
+
+    async function loadSection(section) {
+
+      const item = sections[section];
+
+      if (!item) {
+        return;
+      }
+
+      currentSection = section;
+
+      categories
+        .querySelectorAll("[data-general]")
+        .forEach(button => {
+
+          const active =
+            button.dataset.general === section;
+
+          button.classList.toggle(
+            "active",
+            active
+          );
+
+          button.setAttribute(
+            "aria-pressed",
+            String(active)
+          );
+
+        });
+
+      content.innerHTML =
+        '<div class="general-loading">' +
+        "A carregar " +
+        escapeHTML(item.title) +
+        "…" +
+        "</div>";
+
+      try {
+
+        const response = await fetch(
+          item.file,
+          {
+            cache: "no-cache"
+          }
+        );
+
+        if (!response.ok) {
+
+          throw new Error(
+            "HTTP " + response.status
+          );
+
+        }
+
+        const data = await response.json();
+
+        const rendered = renderValue(data);
+
+        content.innerHTML =
+
+          "<h3>" +
+          escapeHTML(item.title) +
+          "</h3>" +
+
+          '<div class="general-text">' +
+          rendered +
+          "</div>" +
+
+          '<div class="general-actions">' +
+
+          '<button type="button" data-general-copy>' +
+          "Copiar conteúdo" +
+          "</button>" +
+
+          "</div>";
+
+      } catch (error) {
+
+        console.error(
+          "[Hinário] Erro ao carregar:",
+          item.file,
+          error
+        );
+
+        content.innerHTML =
+
+          '<div class="general-error">' +
+
+          "<h3>" +
+          escapeHTML(item.title) +
+          "</h3>" +
+
+          "<p>Não foi possível carregar esta secção.</p>" +
+
+          "<p>Verifica se o ficheiro JSON existe e se está válido.</p>" +
+
+          '<button type="button" data-general-retry>' +
+
+          "Tentar novamente" +
+
+          "</button>" +
+
+          "</div>";
+
+      }
+
+    }
+
+    categories.addEventListener(
+      "click",
+      event => {
+
+        const button =
+          event.target.closest("[data-general]");
+
+        if (!button) {
+          return;
+        }
+
+        loadSection(
+          button.dataset.general
+        );
+
+      }
+    );
+
+    content.addEventListener(
+      "click",
+      async event => {
+
+        if (
+          event.target.closest("[data-general-retry]")
+        ) {
+
+          loadSection(currentSection);
+
+          return;
+
+        }
+
+        if (
+          event.target.closest("[data-general-copy]")
+        ) {
+
+          const text =
+            content.querySelector(".general-text");
+
+          if (!text) {
+            return;
+          }
+
+          try {
+
+            await navigator.clipboard.writeText(
+              text.innerText
+            );
+
+            event.target.textContent =
+              "Conteúdo copiado!";
+
+          } catch (error) {
+
+            console.error(
+              "[Hinário] Erro ao copiar:",
+              error
+            );
+
+            event.target.textContent =
+              "Não foi possível copiar";
+
+          }
+
+        }
+
+      }
+    );
+
+    loadSection("painosso");
+
+  })();
+  </script>
+
+  <!-- =====================================================
+       UTILITÁRIOS
+       ===================================================== -->
+
+  <script>
+  (() => {
+
+    "use strict";
+
+    const year =
+      document.getElementById("year");
+
+    if (year) {
+
+      year.textContent =
+        new Date().getFullYear();
+
+    }
+
+    const search =
+      document.getElementById("searchInput");
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        const isMac =
+          navigator.platform
+            .toUpperCase()
+            .includes("MAC");
+
+        const modifier =
+          isMac
+            ? event.metaKey
+            : event.ctrlKey;
+
+        if (
+          modifier &&
+          event.key.toLowerCase() === "k"
+        ) {
+
+          event.preventDefault();
+
+          if (search) {
+            search.focus();
+          }
+
+        }
+
+      }
+    );
+
+  })();
+  </script>
+
 </body>
 </html>
